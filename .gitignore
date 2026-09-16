@@ -1,0 +1,17 @@
+# ผลการตรวจของแต่ละงาน — เป็นข้อมูลลูกค้า ไม่ขึ้น repo สาธารณะ
+qa-output/
+
+# สคริปต์หน้าเปรียบเทียบรอบตรวจ — config ผูกกับเว็บที่ตรวจจริง (ชื่อเว็บ + findings)
+scripts/pairs.py
+scripts/build-compare.py
+scripts/build-summary.py
+
+# macOS
+.DS_Store
+
+# Claude Code local
+.claude/
+
+# Python
+__pycache__/
+*.pyc

@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web Quality Review — Nessy Explores (Round 2)</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --good:#0CCE6B; --avg:#FFA400; --poor:#FF4E42; --none:#9AA0A6;
+  --good-bg:#E8F9F0; --avg-bg:#FFF6E5; --poor-bg:#FFECEA; --none-bg:#F1F3F4;
+  --ux:#1A73E8; --ux-bg:#E8F0FE; --ui:#9334E6; --ui-bg:#F3E8FD; --tc:#5F6368;
+  --ink:#202124; --ink2:#3C4043; --muted:#5F6368; --faint:#80868B;
+  --line:#DADCE0; --line2:#E8EAED; --bg:#F8F9FA; --card:#fff;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans Thai','Roboto',-apple-system,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--ink);font-size:13.5px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin:0 auto;padding:18px 14px 48px}
+.card{background:var(--card);border:1px solid var(--line2);border-radius:12px;margin-bottom:12px}
+.hd{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.hd .mk{width:24px;height:24px;border-radius:6px;background:var(--ux);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px}
+.hd h1{font-size:15px;font-weight:600}
+.hd .u{margin-left:auto;font-size:12px;color:var(--ux);text-decoration:none;
+  max-width:42%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.sum{display:flex;gap:18px;padding:18px 20px;align-items:center;flex-wrap:wrap}
+.g-lg{position:relative;width:104px;height:104px;flex-shrink:0}
+.g-lg svg{transform:rotate(-90deg)}
+.g-lg .v{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Roboto',sans-serif;font-size:33px}
+.sum-b{flex:1;min-width:210px}
+.bd{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.3px}
+.vd{font-size:17px;font-weight:700;margin:3px 0 2px}
+.vn{font-size:12px;color:var(--muted)}
+.cnt{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}
+.cnt span{font-size:12px;padding:4px 10px;border-radius:7px;font-weight:500}
+.cnt b{font-family:'Roboto',sans-serif;font-weight:700;font-size:14px}
+.k1{background:#FCE8E6;color:#C5221F} .k2{background:var(--poor-bg);color:#D93025}
+.k3{background:var(--avg-bg);color:#B06000} .k4{background:var(--none-bg);color:var(--muted)}
+
+/* group gauges */
+.grp{display:flex;gap:10px;flex-wrap:wrap;padding:0 20px 16px}
+.gbox{flex:1;min-width:150px;border:1px solid var(--line2);border-radius:10px;
+  padding:12px;display:flex;gap:12px;align-items:center}
+.gbox.ux{background:var(--ux-bg);border-color:#D2E3FC}
+.gbox.ui{background:var(--ui-bg);border-color:#E9D5FF}
+.gbox.tc{background:var(--none-bg)}
+.g-md{position:relative;width:76px;height:76px;flex-shrink:0}
+.g-md svg{transform:rotate(-90deg)}
+.g-md .v{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Roboto',sans-serif;font-size:24px}
+.gbox .lb{font-size:12.5px;font-weight:700;margin-bottom:2px}
+.gbox .sc{font-size:11px;color:var(--muted);font-family:'Roboto',sans-serif}
+.gbox .cvr{font-size:10.5px;color:var(--muted);margin-top:3px;line-height:1.35}
+.gbox.ux .lb{color:var(--ux)} .gbox.ui .lb{color:var(--ui)} .gbox.tc .lb{color:var(--tc)}
+
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:2px 20px 16px}
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;line-height:1;
+  padding:6px 11px;border-radius:8px;background:var(--none-bg);color:var(--ink2);
+  border:1px solid var(--line2);white-space:nowrap}
+.chip b{font-weight:600;color:var(--faint);font-size:9.5px;text-transform:uppercase;letter-spacing:.5px}
+.chip .cv{font-weight:500;color:var(--ink)}
+.chip.pj{background:#FEF7E0;border-color:#FDE293;color:#5F4300}
+.chip.r2{background:#E8F0FE;border-color:#D2E3FC;color:#1967D2;font-weight:600}
+.chip .dot{width:9px;height:9px;border-radius:3px;background:#1a73e8;flex:none}
+.chip.pj .dot{background:#F9AB00}
+.chip.date{color:var(--faint)}
+@media(max-width:640px){.chip b{font-size:9px}}
+.cov{margin:0 20px 16px;padding:9px 12px;background:#FEF7E0;border:1px solid #FDE293;
+  border-radius:8px;font-size:11.5px;color:#5F4300}
+.cov .bar{height:5px;border-radius:3px;background:#EDD9A3;margin-top:6px;overflow:hidden}
+.cov .bar i{display:block;height:100%;width:61%;background:#B06000;border-radius:3px}
+/* แท็บ 🕐 ประวัติ — ไทม์ไลน์ตรวจซ้ำแต่ละรอบ (เดิมเป็นการ์ด .delta ด้านบน · ย้ายมาเป็นแท็บ) */
+.hist{padding:14px 18px 20px}
+.hist .hnote{font-size:11px;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.hist .hnote b{color:var(--ink2)}
+.hitem{position:relative;padding:0 0 20px 24px;border-left:2px solid var(--line2)}
+.hitem:last-child{border-left-color:transparent;padding-bottom:2px}
+.hitem .hdot{position:absolute;left:-8px;top:1px;width:13px;height:13px;border-radius:50%;
+  background:#fff;border:2.5px solid var(--muted)}
+.hitem.now .hdot{border-color:var(--good);background:var(--good)}
+.hitem .hrd{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:9px}
+.hitem .hrd .rn{font-size:13.5px;font-weight:700;color:var(--ink)}
+.hitem .hrd .rdate{font-size:11px;color:var(--faint);font-family:'Roboto',sans-serif}
+.hitem .hrd .rtag{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;
+  padding:2px 8px;border-radius:9px}
+.hitem .hrd .rtag.cur{background:var(--good-bg);color:#137333}
+.hitem .hrd .rtag.base{background:var(--none-bg);color:var(--muted)}
+.hitem .hsc{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-bottom:10px;
+  font-family:'Roboto',sans-serif}
+.hitem .hov{font-size:12px;color:var(--ink2)}
+.hitem .hov b{font-size:16px;color:var(--ink)}
+.hitem .hg{font-size:11px;color:var(--muted);padding:2px 9px;background:var(--bg);border-radius:11px}
+.hitem .up{color:#137333;font-weight:700}
+.hitem .dn{color:var(--poor);font-weight:700}
+.hitem .fl{color:var(--faint);font-weight:700}
+.hitem .hchg{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.hitem .hchg li{font-size:11.7px;color:var(--ink2);line-height:1.6}
+.hitem .hchg li b{color:var(--ink)}
+
+/* per-category rows grouped */
+.crow{border-top:1px solid var(--line2);padding:12px 16px 10px}
+.crow .ghd{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;
+  margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.crow.ux .ghd{color:var(--ux)} .crow.ui .ghd{color:var(--ui)} .crow.tc .ghd{color:var(--tc)}
+.ghd .tot{font-family:'Roboto',sans-serif;font-weight:700;font-size:11px;
+  padding:1px 7px;border-radius:10px}
+.crow.ux .tot{background:var(--ux-bg);color:var(--ux)}
+.crow.ui .tot{background:var(--ui-bg);color:var(--ui)}
+.crow.tc .tot{background:var(--none-bg);color:var(--tc)}
+.cats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.gc{text-align:center}
+.g-sm{position:relative;width:54px;height:54px;margin:0 auto 5px}
+.g-sm svg{transform:rotate(-90deg)}
+.g-sm .v{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Roboto',sans-serif;font-size:15px}
+.gc .n{font-size:10.5px;color:var(--ink2);font-weight:500;line-height:1.3}
+.gc .f{font-size:9.5px;color:var(--faint);font-family:'Roboto',sans-serif;margin-top:2px}
+.gc .lc{font-size:9px;color:#B06000;display:block}
+/* category detail as a list (group circles already shown in summary above) */
+.clist{display:flex;flex-direction:column;gap:1px}
+.clist .crw{display:flex;align-items:center;gap:12px;padding:8px 4px;border-bottom:1px solid var(--line2)}
+.clist .crw:last-child{border-bottom:none}
+.clist .cn{flex:0 0 190px;font-size:12.5px;color:var(--ink2);font-weight:500;line-height:1.35}
+.clist .cbar{flex:1;height:7px;border-radius:4px;background:#EEECF3;overflow:hidden;min-width:50px}
+.clist .cbar i{display:block;height:100%;border-radius:4px}
+.clist .cs{width:32px;text-align:right;font-family:'Roboto',sans-serif;font-weight:700;font-size:15px}
+.clist .cf{width:118px;text-align:right;font-size:11px;color:var(--faint);font-family:'Roboto',sans-serif}
+.clist .crw.nt .cbar{background:repeating-linear-gradient(90deg,#E3E1E8 0 4px,transparent 4px 8px)}
+.clist .crw.nt .cs{color:var(--none);font-size:13px}
+.clist .cnote{font-size:10.5px;color:var(--faint);padding:9px 4px 2px;line-height:1.55}
+.clist .cnote b{color:#137333}
+@media(max-width:640px){.clist .cn{flex-basis:120px}.clist .cf{width:82px}}
+.legend{display:flex;gap:14px;flex-wrap:wrap;padding:9px 20px;border-top:1px solid var(--line2);
+  font-size:10.5px;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:5px}
+.sh{flex-shrink:0}
+.tri{width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:8px solid var(--poor)}
+.sq{width:8px;height:8px;background:var(--avg)}
+.ci{width:8px;height:8px;border-radius:50%;background:var(--good)}
+.da{width:8px;height:8px;border-radius:50%;background:var(--none)}
+
+.tabs input{position:absolute;opacity:0;pointer-events:none}
+.tabbar{display:flex;gap:2px;border-bottom:1px solid var(--line2);padding:0 8px;overflow-x:auto}
+.tabbar label{padding:11px 13px;font-size:12.5px;font-weight:500;color:var(--muted);
+  cursor:pointer;border-bottom:2.5px solid transparent;white-space:nowrap}
+.tabbar label:hover{color:var(--ink)}
+.tabbar label b{font-family:'Roboto',sans-serif;font-size:11px;background:var(--none-bg);
+  padding:1px 6px;border-radius:10px;margin-left:5px;color:var(--muted)}
+.pane{display:none}
+#t1:checked~.tabbar label[for=t1],#t2:checked~.tabbar label[for=t2],
+#t3:checked~.tabbar label[for=t3],#t4:checked~.tabbar label[for=t4]{
+  color:var(--ux);border-bottom-color:var(--ux)}
+#t1:checked~.tabbar label[for=t1] b,#t2:checked~.tabbar label[for=t2] b{
+  background:var(--ux-bg);color:var(--ux)}
+#t1:checked~.p1,#t2:checked~.p2,#t3:checked~.p3,#t4:checked~.p4{display:block}
+
+.gh{padding:11px 18px 5px;font-size:10.5px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.5px;color:var(--faint)}
+.ghs{padding:0 18px 6px;font-size:11px;color:var(--muted);line-height:1.5}
+details{border-top:1px solid var(--line2)}
+.gh+details{border-top:none}
+summary{padding:11px 18px;cursor:pointer;display:flex;align-items:center;gap:9px;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary:hover{background:var(--bg)}
+summary .ic{width:13px;display:flex;justify-content:center;flex-shrink:0}
+summary .tg{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;flex-shrink:0}
+.t-ux{background:var(--ux-bg);color:var(--ux)} .t-ui{background:var(--ui-bg);color:var(--ui)}
+.t-tc{background:var(--none-bg);color:var(--tc)}
+summary .t{flex:1;font-size:12.8px;font-weight:500;line-height:1.4}
+summary .cr{font-size:10px;color:#C5221F;background:#FCE8E6;padding:1px 6px;border-radius:5px;
+  font-weight:700;flex-shrink:0}
+summary .nw{font-size:10px;color:#137333;background:#E6F4EA;padding:1px 6px;border-radius:5px;
+  font-weight:700;flex-shrink:0}
+summary .im{font-size:11.5px;font-family:'Roboto',sans-serif;font-weight:700;
+  padding:1px 7px;border-radius:5px;white-space:nowrap}
+summary .tm{font-size:11px;color:var(--faint);white-space:nowrap;min-width:44px;text-align:right}
+summary .ar{color:var(--faint);font-size:10px}
+details[open] summary{background:var(--bg)}
+.bo{padding:2px 18px 16px 41px;background:var(--bg);font-size:12.3px;color:var(--ink2)}
+.bo dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px}
+.bo dt{font-size:11px;color:var(--muted);font-weight:600;white-space:nowrap;padding-top:1px}
+.bo code{background:#fff;border:1px solid var(--line);border-radius:3px;padding:0 4px;
+  font-family:'Roboto Mono',monospace;font-size:11px;word-break:break-all}
+.i1{background:var(--poor-bg);color:#D93025} .i2{background:var(--avg-bg);color:#B06000}
+.i3{background:var(--none-bg);color:var(--muted)}
+.roll{padding:11px 18px;background:#E6F4EA;font-size:12.3px;color:#137333;font-weight:500;
+  display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;border-top:1px solid #CEEAD6}
+.roll b{font-family:'Roboto',sans-serif;font-weight:700}
+.pgrp{padding:12px 18px 16px}
+.pgrp h4{font-size:10.5px;text-transform:uppercase;letter-spacing:.4px;
+  margin:14px 0 5px;font-weight:700;display:flex;align-items:center;gap:6px}
+.pgrp h4:first-child{margin-top:0}
+.pgrp h4.ux{color:var(--ux)} .pgrp h4.ui{color:var(--ui)} .pgrp h4.tc{color:var(--tc)}
+.pgrp li{list-style:none;font-size:12.3px;color:var(--ink2);padding:3px 0 3px 18px;position:relative}
+.pgrp li:before{content:"\2713";position:absolute;left:0;color:var(--good);font-weight:700;font-size:11px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{text-align:left;padding:8px 18px;background:var(--bg);color:var(--muted);font-size:10.5px;
+  font-weight:700;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--line2)}
+tbody td{padding:9px 18px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--ink2)}
+tbody tr:last-child td{border-bottom:none}
+.st{font-weight:700} .sn{color:#D93025} .sd{color:var(--faint)} .sy{color:#137333}
+.note{padding:12px 18px;font-size:12px;color:var(--ink2);background:var(--bg);border-top:1px solid var(--line2)}
+.note b.lb{color:var(--muted);font-size:11px}
+.warn{padding:10px 18px;background:#FEF7E0;font-size:11.5px;color:#5F4300;border-top:1px solid #FDE293}
+.good{padding:11px 18px;background:#E6F4EA;font-size:12px;color:#137333;border-top:1px solid #CEEAD6}
+.foot{text-align:center;font-size:11px;color:var(--faint);padding:16px 14px 0;line-height:1.6}
+.foot code{font-family:'Roboto Mono',monospace}
+@media(max-width:760px){.cats{grid-template-columns:repeat(3,1fr);gap:8px 2px}.hd .u{display:none}}
+@media(max-width:440px){.cats{grid-template-columns:repeat(2,1fr)}}
+/* ---- ภาพประกอบ (screenshots) — บังคับมีทุกรายงาน อยู่ในแท็บ "ความพร้อม & รอบถัดไป" ---- */
+.shots{padding:18px 20px}
+.shots h4{font-size:11px;text-transform:uppercase;letter-spacing:.4px;color:var(--faint);font-weight:700;
+  margin:34px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--line2)}
+.shots h4:first-child{margin-top:4px}
+.bpr{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:8px}
+.bpr figure{margin:0;background:#f8f7fb;border:1px solid var(--line);border-radius:10px;padding:9px}
+.bpr img{width:100%;height:140px;object-fit:cover;object-position:top;border:1px solid var(--line);border-radius:6px;display:block}
+.bpr figcaption{font-size:12.5px;color:var(--muted);margin-top:9px;text-align:center}
+.bpr figcaption b{color:var(--ink2);font-family:'Roboto',sans-serif}
+.shotfig{display:flex;gap:18px;align-items:flex-start;margin:0 0 26px;padding:18px;
+  background:#f8f7fb;border:1px solid var(--line);border-radius:12px;box-shadow:0 1px 4px rgba(30,20,60,.06)}
+.shotfig:last-of-type{margin-bottom:6px}
+.shotfig img{width:360px;max-width:46%;height:auto;border:1px solid var(--line);border-radius:8px;display:block;flex:0 0 auto}
+.shotfig figcaption{font-size:14px;color:var(--ink2);line-height:1.7;flex:1;padding-top:2px}
+.shotfig figcaption b{color:#D93025}
+@media(max-width:640px){.shotfig{flex-direction:column}.shotfig img{width:100%;max-width:none}}
+.shotnote{font-size:12.5px;color:var(--muted);padding:6px 20px 16px;line-height:1.6}
+@media(max-width:640px){.bpr{grid-template-columns:repeat(2,1fr)}}
+#t5:checked~.tabbar label[for=t5],#t6:checked~.tabbar label[for=t6]{color:var(--ux);border-bottom-color:var(--ux)}
+#t5:checked~.p5,#t6:checked~.p6{display:block}
+@media print{body{background:#fff}.pane{display:block!important}.tabbar{display:none}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="hd">
+  <div class="mk">Q</div><h1>Web Quality Review</h1>
+  <a class="u" href="https://nessy-explores.vercel.app" target="_blank" rel="noopener">nessy-explores.vercel.app</a>
+</div>
+
+<div class="card">
+  <div class="sum">
+    <div class="g-lg">
+      <svg width="104" height="104" viewBox="0 0 104 104">
+        <circle cx="52" cy="52" r="44" fill="var(--poor-bg)"/>
+        <circle cx="52" cy="52" r="44" fill="none" stroke="#F5C6C2" stroke-width="8"/>
+        <circle cx="52" cy="52" r="44" fill="none" stroke="var(--poor)" stroke-width="8"
+          stroke-linecap="round" stroke-dasharray="99.53 276.46"/>
+      </svg>
+      <div class="v" style="color:var(--poor)">36</div>
+    </div>
+    <div class="sum-b">
+      <div class="bd" style="color:var(--poor)"><i class="sh tri"></i>POOR</div>
+      <!-- vd = แค่ verdict สั้นๆ: <emoji> <score> / 100 — <ชื่อ band> · ห้ามใส่ breakdown Blocker/High/UX/Tech ต่อท้าย -->
+      <div class="vd">🚫 36 / 100 — ยังไม่ควรส่งมอบ</div>
+      <div class="cnt">
+        <span class="k1"><b>0</b> Blocker</span><span class="k2"><b>6</b> High</span>
+        <span class="k3"><b>8</b> Medium</span><span class="k4"><b>4</b> Low</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="grp">
+    <div class="gbox ux">
+      <div class="g-md"><svg width="76" height="76" viewBox="0 0 76 76">
+        <circle cx="38" cy="38" r="34" fill="#fff" opacity=".55"/>
+        <circle cx="38" cy="38" r="34" fill="none" stroke="#C9DCFB" stroke-width="6"/>
+        <circle cx="38" cy="38" r="34" fill="none" stroke="var(--avg)" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="113.22 213.63"/></svg>
+        <div class="v" style="color:#B06000">53</div></div>
+      <div><div class="lb">🧠 UX</div>
+        <div class="sc">18 / 34 คะแนนที่ตรวจได้</div>
+        <div class="cvr">เต็ม 40 · ตรวจได้ 34 · Flow &amp; States ตรวจไม่ได้</div></div>
+    </div>
+    <div class="gbox ui">
+      <div class="g-md"><svg width="76" height="76" viewBox="0 0 76 76">
+        <circle cx="38" cy="38" r="34" fill="#fff" opacity=".55"/>
+        <circle cx="38" cy="38" r="34" fill="none" stroke="#E4CCFA" stroke-width="6"/></svg>
+        <div class="v" style="color:var(--poor)">0</div></div>
+      <div><div class="lb">🎨 UI</div>
+        <div class="sc">0 / 14 คะแนนที่ตรวจได้</div>
+        <div class="cvr"><b>เชื่อถือได้ต่ำ</b> — เต็ม 32 ตรวจได้แค่ 14 เพราะไม่มี CSS/browser</div></div>
+    </div>
+    <div class="gbox tc">
+      <div class="g-md"><svg width="76" height="76" viewBox="0 0 76 76">
+        <circle cx="38" cy="38" r="34" fill="#fff" opacity=".55"/>
+        <circle cx="38" cy="38" r="34" fill="none" stroke="#D8DBDE" stroke-width="6"/>
+        <circle cx="38" cy="38" r="34" fill="none" stroke="var(--poor)" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="57.68 213.63"/></svg>
+        <div class="v" style="color:var(--poor)">27</div></div>
+      <div><div class="lb">⚙️ Technical</div>
+        <div class="sc">4 / 15 คะแนนที่ตรวจได้</div>
+        <div class="cvr">เต็ม 15 · T1 อย่างเดียว (ตรวจผ่าน URL)</div></div>
+    </div>
+  </div>
+
+  <div class="meta">
+    <span class="chip pj"><i class="dot"></i>Project</span>
+    <span class="chip"><b>Type</b> <span class="cv">🅐 Information (landing page)</span></span>
+    <span class="chip"><b>Size</b> <span class="cv">M</span></span>
+    <span class="chip"><b>Method</b> <span class="cv">URL + probe 4 bp</span></span>
+    <span class="chip"><b>โมเดล</b> <span class="cv">รีวิวผ่านลิงก์ /100</span></span>
+    <span class="chip date">2 ก.ย. 2026</span>
+  </div>
+
+  <div class="crow ux">
+    <div class="ghd">🧠 UX — ใช้งานได้และตอบโจทย์ <span class="tot">18 / 34</span></div>
+    <div class="clist">
+      <div class="crw"><span class="cn">UX1 Requirement &amp; Content</span><span class="cbar"><i style="width:25%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">25</span></div>
+      <div class="crw"><span class="cn">UX2 IA &amp; Navigation</span><span class="cbar"><i style="width:100%;background:var(--good)"></i></span><span class="cs" style="color:var(--good)">100</span></div>
+      <div class="crw nt"><span class="cn">UX3 Flow, States &amp; Interaction</span><span class="cbar"></span><span class="cs">—</span></div>
+      <div class="crw"><span class="cn">UX4 ชุดเฉพาะ Information</span><span class="cbar"><i style="width:33%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">33</span></div>
+    </div>
+  </div>
+
+  <div class="crow ui">
+    <div class="ghd">🎨 UI — หน้าตาและการนำเสนอ <span class="tot">0 / 14</span></div>
+    <div class="clist">
+      <div class="crw nt"><span class="cn">UI1 Design System &amp; Visual</span><span class="cbar"></span><span class="cs">—</span></div>
+      <div class="crw nt"><span class="cn">UI2 Responsive Layout</span><span class="cbar"></span><span class="cs">—</span></div>
+      <div class="crw"><span class="cn">UI3 Typography, Contrast &amp; Media</span><span class="cbar"><i style="width:0%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">0</span></div>
+      <div class="cnote">ตรวจ UI จาก URL ได้แค่ alt text และรูปโหลดได้ไหม · <b style="color:#B06000">ต้องเปิด browser (playwright/probe) จึงจะได้คะแนน UI ที่มีความหมาย</b></div>
+    </div>
+  </div>
+
+  <div class="crow tc">
+    <div class="ghd">⚙️ Technical <span class="tot">4 / 15</span></div>
+    <div class="clist">
+      <div class="crw"><span class="cn">T1 Functional, Perf &amp; SEO</span><span class="cbar"><i style="width:27%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">27</span></div>
+      <div class="cnote">ตรวจผ่าน URL อย่างเดียว · <b>ไม่มีหมวดที่ต้องเปิด repo แล้ว (Technical = T1 อย่างเดียว)</b></div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><i class="sh tri"></i>0–49 Poor</span><span><i class="sh sq"></i>50–89 Needs Improvement</span>
+    <span><i class="sh ci"></i>90–100 Good</span><span><i class="sh da"></i>Not Tested</span>
+  </div>
+</div>
+
+<div class="card tabs">
+  <input type="radio" name="tab" id="t1" checked>
+  <input type="radio" name="tab" id="t2">
+  <input type="radio" name="tab" id="t3">
+  <input type="radio" name="tab" id="t4">
+  <input type="radio" name="tab" id="t5">
+  <input type="radio" name="tab" id="t6">
+  <div class="tabbar">
+    <label for="t1">ปัญหาที่ต้องแก้ <b>18</b></label>
+    <label for="t2">ผ่านแล้ว <b>17</b></label>
+    <label for="t3">ตรวจไม่ได้</label>
+    <label for="t4">ความพร้อม &amp; ส่งมอบ</label>
+    <label for="t5">🕐 ประวัติ</label>
+    <label for="t6">📸 ภาพประกอบ</label>
+  </div>
+
+  <div class="pane p1">
+    <div class="gh">🔴 High — 5 ข้อค้างจากรอบที่ 1 · 1 ข้อใหม่</div>
+
+    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">คะแนนรีวิวรายทริป 4.6–4.9 ขัดกับคะแนน Google 4.1 ของตัวเอง</span>
+      <span class="nw">ใหม่</span><span class="im i1">+4</span><span class="tm">1 ชม.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>การ์ดทริป 12 ใบที่เพิ่มคะแนนเข้ามารอบนี้ — พีพี 4.9 · เจมส์บอนด์ 4.8 · ราชา-เฮ 4.7 · 7 เกาะ 4.8 · สิมิลัน 4.9 · เจ็ตสกี 4.9 · ล่องแก่ง 4.7 · ATV 4.6 · ซิปไลน์ 4.8 · แคมป์ช้าง 4.7</dd>
+        <dt>ผลกระทบ</dt><dd>section รีวิวของเว็บเองแสดง <b>4.1 จาก 339 รีวิวบน Google</b> แต่การ์ดทริปทุกใบให้ 4.6–4.9 ซึ่งสูงกว่าค่าเฉลี่ยของธุรกิจทั้งหมด · ไม่มีการระบุว่าคะแนนรายทริปมาจากไหน (Google ต่อรายการ? ระบบภายใน? กี่รีวิว?) · เป็นความเสี่ยงเดียวกับ “40+ ทริป” คือตัวเลขที่ตรวจสอบไม่ได้และขัดกับข้อมูลอื่นในหน้าเดียวกัน — บนธุรกิจที่รับเงินโอนล่วงหน้า ความไม่สอดคล้องแบบนี้ทำลายความน่าเชื่อถือที่เว็บสร้างมาดีแล้ว</dd>
+        <dt>วิธีแก้</dt><dd>ระบุที่มาและจำนวนรีวิวใต้คะแนนทุกใบ เช่น “4.9 · จาก 42 รีวิว” · ถ้าเป็นคะแนนจากระบบภายในต้องบอกว่าเป็นคะแนนจากลูกค้า Nessy เอง · ถ้าไม่มีข้อมูลจริงรองรับ ให้เอาออกและคงเฉพาะคะแนน Google รวมที่ตรวจสอบได้</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">เวลาทำการขัดแย้งกันเองในหน้าเดียว</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+4</span><span class="tm">20 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>section ติดต่อเขียน “ตอบทุกวัน 08:00–22:00 น.” · footer เขียน “จ.–พฤ. 11:00–20:00 · ศ. 11:00–18:00 · ส. 19:00–22:00 · อา. 11:00–20:00”</dd>
+        <dt>ผลกระทบ</dt><dd>LINE เป็นช่องทางปิดการขายเดียว ลูกค้าที่ทัก 09:00 ตามที่ section ติดต่อบอกแล้วไม่มีใครตอบจนถึง 11:00 จะเข้าใจว่าร้านไม่ตอบ · เวลาเสาร์ที่เปิดแค่ 19:00–22:00 ขัดกับ “ทุกวัน 08:00–22:00” อย่างชัดเจน</dd>
+        <dt>วิธีแก้</dt><dd>เลือกชุดเวลาที่เป็นความจริงชุดเดียวแล้วใช้ให้ตรงกันทั้งสองจุด · ถ้าเวลาตอบแชทต่างจากเวลาเปิดออฟฟิศ ให้แยกป้ายให้ชัดว่า “ออฟฟิศป่าตอง” กับ “ตอบแชท” คนละเวลา</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">“40+ ทริปและกิจกรรม” แต่หน้าเว็บแสดงจริง 25 รายการ</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+4</span><span class="tm">15 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>trust bar ใต้ hero</dd>
+        <dt>ผลกระทบ</dt><dd>นับการ์ดในหมวด “รายการแพ็กเกจทั้งหมด” รอบนี้ยังได้ 25 รายการเท่าเดิม ตัวเลขที่โฆษณาไม่ตรงกับสิ่งที่ผู้ใช้เห็น</dd>
+        <dt>วิธีแก้</dt><dd>แก้เป็นตัวเลขจริง หรือถ้า 40+ นับรวมออปชันย่อยและตัวเลือกเรือ ให้เขียนให้ชัด เช่น “25 ทริป · 40+ ตัวเลือกและออปชัน” — รอบนี้เพิ่มออปชันเสริมของเกาะราชาและโชว์เข้ามาอีก ซึ่งช่วยให้เขียนแบบหลังได้จริง</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-tc">Tech</span>
+      <span class="t">ลิงก์ Facebook ชี้ไปหน้าค้นหา ไม่ใช่เพจ และชื่อที่ค้นหาไม่ตรงแบรนด์</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+4</span><span class="tm">10 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>ไอคอนโซเชียลใน footer — <code>facebook.com/search/top?q=Phuket%20with%20Nessy%20Island%20Life%20%26%20Adventures</code></dd>
+        <dt>ผลกระทบ</dt><dd>กดแล้วไปหน้าผลการค้นหา ผู้ใช้ต้องเดาเองว่าอันไหนคือเพจจริง · ชื่อที่ค้นหาไม่ตรงกับแบรนด์ “Nessy Explores” ที่ใช้ทั้งเว็บ ทำให้ดูเหมือนคนละธุรกิจ — เป็นสัญญาณที่ลดความน่าเชื่อถือทันทีสำหรับเว็บที่รับเงินโอน</dd>
+        <dt>วิธีแก้</dt><dd>เปลี่ยนเป็น URL เพจจริงรูปแบบ <code>facebook.com/&lt;page-username&gt;</code> · ถ้าชื่อเพจยังเป็นชื่อเก่า ควรคุยกับลูกค้าเรื่องเปลี่ยนชื่อเพจให้ตรงแบรนด์</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-tc">Tech</span>
+      <span class="t">ไม่พบ Open Graph image และ structured data</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+4</span><span class="tm">1.5 ชม.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd><code>&lt;head&gt;</code> — พบเพียง <code>title</code>, <code>meta description</code>, <code>theme-color</code>, <code>viewport</code></dd>
+        <dt>ผลกระทบ</dt><dd>ทุก CTA ส่งคนเข้า LINE และคนส่งลิงก์ต่อกันใน LINE เมื่อไม่มี <code>og:image</code> ลิงก์จะขึ้นเป็นกล่องเปล่า อัตราการกดตกอย่างมีนัยสำคัญ · การไม่มี structured data (<code>LocalBusiness</code>, <code>TouristTrip</code>, <code>AggregateRating</code>) ทำให้เสียโอกาสขึ้น rich result ทั้งที่เว็บมีข้อมูลครบพร้อมใช้ — ราคา, คะแนนรีวิว, ที่อยู่, เวลาทำการ</dd>
+        <dt>วิธีแก้</dt><dd>เพิ่ม <code>og:image</code> 1200×630 (ใช้ภาพเกาะที่มีอยู่ได้), <code>og:title/description/url</code>, <code>twitter:card</code>, <code>canonical</code> · เพิ่ม JSON-LD <code>LocalBusiness</code> + <code>AggregateRating</code> · <b>ทำพร้อมกับแก้เรื่องคะแนนรายทริปด้วย</b> เพราะ structured data ที่ใส่คะแนนไม่มีที่มาอาจถูก Google ปรับ</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-ui">UI</span>
+      <span class="t">มีรูปภาพที่ src ว่างเปล่าท้ายหน้า — รูปแตกบน production</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+7</span><span class="tm">10 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>ท้ายหน้า ใกล้ปุ่มลอย “สอบถาม” — พบ <code>&lt;img&gt;</code> ที่ไม่มี src และไม่มี alt</dd>
+        <dt>ผลกระทบ</dt><dd>น่าจะเป็นไอคอนของปุ่มลอย LINE ที่โหลดไม่ขึ้น จะแสดงเป็นกรอบรูปแตกค้างบนทุกหน้าจอ · ตำแหน่งนี้คือจุดที่ผู้ใช้กดเพื่อปิดการขาย จึงเห็นชัดที่สุด</dd>
+        <dt>คืนคะแนน</dt><dd>+7 สูงเพราะหมวด UI3 ตรวจได้แค่ 2 ข้อ คะแนนทั้งหมวดจึงผูกกับข้อนี้และข้อ alt text — ตัวเลขจะลดลงเมื่อตรวจ UI บน browser ได้ครบ</dd>
+        <dt>วิธีแก้</dt><dd>ใส่ src ที่ถูกต้อง หรือถ้าเป็นไอคอนตกแต่งให้เปลี่ยนไปใช้ SVG inline · ยืนยันด้วย DevTools Network tab หา request ที่ 404</dd>
+      </dl></div></details>
+
+    <div class="gh">🟡 Medium — ค้างจากรอบที่ 1 ทั้งหมด</div>
+
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">ไม่ระบุ VAT อย่างสม่ำเสมอ — โชว์ระบุครบ แต่ทัวร์เกาะไม่ระบุเลย</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+4</span><span class="tm">1 ชม.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>Phuket FantaSea และ Carnival Magic ระบุ “ราคารวม VAT 7% แล้ว” ชัดเจน · ทัวร์เกาะ ดำน้ำ ผจญภัย และรถรับส่งทั้งหมดไม่ระบุ</dd>
+        <dt>ผลกระทบ</dt><dd>ลูกค้าที่ต้องการใบกำกับภาษีต้องถามซ้ำทุกครั้ง และเสี่ยงเข้าใจว่าราคาที่เห็นคือราคาสุทธิแล้วต้องจ่ายเพิ่มภายหลัง — สาเหตุข้อพิพาทที่พบบ่อยในธุรกิจทัวร์</dd>
+        <dt>วิธีแก้</dt><dd>ประกาศครั้งเดียวเด่นๆ ใน section แพ็กเกจว่า “ราคาทั้งหมดรวม VAT 7% แล้ว ยกเว้นที่ระบุไว้เป็นอย่างอื่น” — เร็วกว่าไปใส่ทีละการ์ด</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">7 จาก 25 รายการขึ้น “สอบถามราคา” โดยไม่มีราคาเริ่มต้น</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+2</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>ทะเลแหวก-กระบี่ · หมู่เกาะสุรินทร์ · ธารโบกขรณี-เกาะห้อง · Discover Scuba · กิจกรรมริมหาดป่าตอง · เมืองเก่าภูเก็ต · ตลาดเช้า &amp; หมู่บ้านชาวเล</dd>
+        <dt>ผลกระทบ</dt><dd>เมื่อ 18 รายการแสดงราคาแต่ 7 รายการไม่แสดง ผู้ใช้จะสงสัยว่าที่ไม่บอกเพราะแพงหรือเปล่า และเปรียบเทียบทริปไม่ครบ · น่าสังเกตว่า 4 ใน 7 รายการนี้เป็นรายการที่ติดป้าย “ใหม่” ซึ่งอาจยังไม่ได้ตั้งราคา</dd>
+        <dt>วิธีแก้</dt><dd>ใส่ราคาเริ่มต้น “เริ่ม ฿X,XXX” หรือช่วงราคา — การ์ดเฟอร์รี่ทำถูกแล้วด้วยป้าย “เริ่ม ฿1,200” ใช้รูปแบบเดียวกันได้เลย</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">ราคาออปชัน Phuket FantaSea ฿1,550 กำกวมว่าเป็นส่วนเพิ่มหรือราคารวม</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+2</span><span class="tm">20 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>การ์ด Phuket FantaSea — ราคาหลัก ฿1,800 / ท่าน แต่ออปชัน “Suriyamas Gold … ฿1,550 / ท่าน”</dd>
+        <dt>ผลกระทบ</dt><dd>ออปชันอัปเกรดที่ราคาถูกกว่าตัวหลักอ่านแล้วสับสน · ออปชันอื่นในการ์ดเดียวกันใช้รูปแบบชัด (“อัปเกรดที่นั่ง ฿350 / ที่นั่ง”) ทำให้ยิ่งเห็นความไม่สม่ำเสมอ</dd>
+        <dt>วิธีแก้</dt><dd>เขียนเป็น “+฿1,550 / ท่าน” ให้เหมือนออปชันอื่น หรือระบุราคารวมสุทธิเลย</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">ทัวร์เกาะหลักยังไม่ระบุราคาเด็ก (โชว์และเรือเพิ่มให้แล้วรอบนี้)</span>
+      <span class="cr">แก้บางส่วน</span><span class="im i2">+2</span><span class="tm">40 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ความคืบหน้ารอบนี้</dt><dd><b>ดีขึ้น</b> — Dolphin Show เพิ่มเงื่อนไข “เด็กต่ำกว่า 90 ซม. เข้าฟรี · 90–130 ซม. คิดราคาเด็ก” · Siam Niramit เพิ่มราคาเด็ก 100–140 ซม. ทั้ง 3 ระดับบัตร และ “ต่ำกว่า 100 ซม. เข้าฟรี” · เฟอร์รี่เพิ่ม “เด็กเล็กคิดค่าธรรมเนียม +฿300/เที่ยว”</dd>
+        <dt>ที่ยังขาด</dt><dd>เกาะพีพี, 4 เกาะเจมส์บอนด์, ราชา-เฮ, 7 เกาะ, สิมิลัน — ทัวร์เกาะซึ่งเป็นสินค้าหลักและเป็นกลุ่มที่ครอบครัวซื้อมากที่สุด ยังไม่มีราคาเด็ก</dd>
+        <dt>วิธีแก้</dt><dd>ใช้รูปแบบเดียวกับที่ทำในการ์ดโชว์และเฟอร์รี่แล้ว มาใส่ในการ์ดทัวร์เกาะให้ครบ</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">แสดงเลขบัญชีธนาคารบนหน้า public โดยไม่มีวิธีให้ลูกค้ายืนยันความถูกต้อง</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+2</span><span class="tm">20 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>section “ชำระเงินอย่างปลอดภัย” — แสดงชื่อบัญชี ธนาคาร และเลขบัญชี 332-2-83353-8</dd>
+        <dt>ผลกระทบ</dt><dd>คำเตือน “ชำระผ่านบัญชีที่มีชื่อบัญชีตรงกับชื่อบริษัทเท่านั้น” คิดมาดีแล้ว แต่การวางเลขบัญชีบนหน้า public ทำให้มิจฉาชีพคัดลอกหน้าเว็บทั้งหน้าแล้วเปลี่ยนเฉพาะเลขบัญชีได้ง่าย ซึ่งเป็นรูปแบบการโกงที่พบบ่อยในธุรกิจทัวร์ภูเก็ต</dd>
+        <dt>วิธีแก้</dt><dd>เพิ่ม “กรุณายืนยันเลขบัญชีกับทีมงานผ่าน LINE OA ก่อนโอนทุกครั้ง” · พิจารณาแสดงเฉพาะชื่อบัญชีกับธนาคารบนเว็บ แล้วแจ้งเลขในแชท</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">หมวดทัวร์ที่โชว์เด่นมี 3 หมวด แต่ filter มี 6 หมวด</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+1</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>section “ค้นหาภูเก็ตในแบบของคุณ” แสดง 3 หมวด (เกาะ &amp; ทะเล, ดำน้ำ, Local Phuket) · filter และเมนู footer มี 6 หมวด</dd>
+        <dt>ผลกระทบ</dt><dd>ผู้ใช้ที่สนใจ ATV ซิปไลน์ หรือโชว์ ไม่เห็นทางเข้าในส่วนที่ออกแบบมาให้เป็นจุดเริ่มค้นหา · กลุ่มโชว์มีสินค้าถึง 6 รายการซึ่งเยอะที่สุดรองจากทะเล</dd>
+        <dt>วิธีแก้</dt><dd>เพิ่มการ์ดให้ครบ 6 หมวด หรือปรับหัวข้อให้บอกว่าเป็นหมวดยอดนิยม 3 อันดับ พร้อมลิงก์ “ดูทุกหมวด”</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">ไม่มีคำอธิบายเรื่องสวัสดิภาพสัตว์ในรายการโลมา ขณะที่แคมป์ช้างมี</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">&lt;1</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>Dolphin Show และออปชัน “ว่ายน้ำกับโลมา ฿6,000” · เทียบกับแคมป์ช้างที่เขียน “เลือกแบบไม่ขี่ได้” และ “เราเลือกแคมป์ที่ดูแลช้างดีให้เท่านั้น”</dd>
+        <dt>ผลกระทบ</dt><dd>เว็บแสดงจุดยืนเรื่องช้างไว้ดีมาก แต่ไม่พูดถึงโลมาเลย ทำให้จุดยืนดูไม่สม่ำเสมอ · นักท่องเที่ยวยุโรปและออสเตรเลียซึ่งเป็นกลุ่มเป้าหมายของทัวร์ภูเก็ตจำนวนมากมองกิจกรรมโลมาในกรงเป็นประเด็น อาจกระทบภาพลักษณ์แบรนด์ที่วางตัวเป็น local ที่ใส่ใจชุมชน</dd>
+        <dt>วิธีแก้</dt><dd>คุยกับลูกค้าเรื่องจุดยืน แล้วเขียนให้สอดคล้องกับที่ทำไว้กับช้าง — ระบุมาตรฐานสถานที่ที่เลือก หรือถ้าจุดยืนคือไม่สนับสนุน ก็พิจารณาตัดออปชันว่ายน้ำกับโลมา</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-tc">Tech</span>
+      <span class="t">Social handle ไม่สอดคล้องกับแบรนด์ — TikTok เป็น @nessyeraaa</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">&lt;1</span><span class="tm">15 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>footer — IG <code>@nessyexplores</code> ✅ · YouTube <code>@nessyexplores</code> ✅ · TikTok <code>@nessyeraaa</code> ❌ · Facebook เป็นลิงก์ค้นหา ❌</dd>
+        <dt>ผลกระทบ</dt><dd>สองในห้าช่องทางไม่ตรงกับชื่อแบรนด์ ผู้ใช้ที่ตรวจสอบตัวตนธุรกิจก่อนโอนเงินอาจสะดุด</dd>
+        <dt>วิธีแก้</dt><dd>แจ้งลูกค้าเปลี่ยน handle TikTok ถ้าชื่อว่าง · ถ้าเปลี่ยนไม่ได้ ให้ระบุกำกับใน footer ว่าเป็นบัญชีของทีม Nessy</dd>
+      </dl></div></details>
+
+    <div class="gh">⚪ Low</div>
+
+    <details><summary><span class="ic"><i class="sh da"></i></span><span class="tg t-ui">UI</span>
+      <span class="t">โลโก้และภาพ hero ไม่มี alt text (ภาพสินค้าเขียนไว้ดีเยี่ยม)</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i3">+7</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd><code>logo-mark.webp</code> ทั้งใน header และ footer · <code>hero-koh-hong.webp</code></dd>
+        <dt>ผลกระทบ</dt><dd>ภาพสินค้า 25 ใบเขียน alt ละเอียดมาก (เช่น “เรือหางยาวแล่นผ่านหน้าผาหินปูนและน้ำทะเลสีครามที่ไร่เลย์ กระบี่”) ดีกว่ามาตรฐานทั่วไป แต่ 3 จุดนี้ยังว่าง screen reader จึงไม่รู้ว่าโลโก้คือแบรนด์อะไร</dd>
+        <dt>วิธีแก้</dt><dd><code>alt="Nessy Explores"</code> ที่โลโก้ · hero ใส่ alt บรรยายภาพ หรือ <code>alt=""</code> อย่างตั้งใจถ้าถือเป็นภาพตกแต่ง</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh da"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">Section “รีวิวจริงจากทริปจริง” แสดงแต่คะแนนรวม ไม่มีรีวิวให้อ่าน</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i3">&lt;1</span><span class="tm">40 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>section <code>#reviews</code> — แสดง 4.1 จาก 339 รีวิว พร้อมลิงก์ Google Maps</dd>
+        <dt>ผลกระทบ</dt><dd>หัวข้อสัญญาว่าจะได้อ่านรีวิวจากทริปจริง แต่ให้แค่ตัวเลขรวม · การมีลิงก์ตรวจสอบได้เป็นข้อดีที่ควรรักษาไว้ · ปุ่มปัจจุบันคือ “เขียนรีวิว” ซึ่งชวนให้เขียน ไม่ใช่ให้อ่าน จึงยิ่งไม่ตรงกับหัวข้อ</dd>
+        <dt>วิธีแก้</dt><dd>ดึงรีวิว 3–4 อันมาแสดงพร้อมชื่อและวันที่ (Google Places API) แล้วคงลิงก์ “ดูทั้งหมดบน Google” · เพิ่มปุ่ม “อ่านรีวิวทั้งหมด” แยกจาก “เขียนรีวิว”</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh da"></i></span><span class="tg t-tc">Tech</span>
+      <span class="t">ใส่ cache-busting <code>?v=20260901</code> เฉพาะบางภาพ ไม่สม่ำเสมอ</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i3">&lt;1</span><span class="tm">15 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>ประมาณ 10 ภาพมี query string <code>?v=20260901</code> ส่วนที่เหลือไม่มี</dd>
+        <dt>ผลกระทบ</dt><dd>บ่งชี้ว่ามีการเปลี่ยนภาพรอบหนึ่งแล้วใส่ version เฉพาะภาพที่แก้ ใช้งานได้ แต่ถ้าแก้ภาพเดิมซ้ำโดยไม่เปลี่ยนเลข ผู้ใช้เดิมจะเห็นภาพเก่า</dd>
+        <dt>วิธีแก้</dt><dd>ใช้วิธีเดียวกันทั้งเว็บ — ตั้งชื่อไฟล์ใหม่เมื่อเปลี่ยนภาพ หรือใส่ version ให้ทุกภาพและอัปเดตพร้อมกันตอน deploy</dd>
+      </dl></div></details>
+
+    <details><summary><span class="ic"><i class="sh da"></i></span><span class="tg t-ux">UX</span>
+      <span class="t">ออปชัน “ว่ายน้ำกับโลมา ฿6,000” แพงกว่าบัตรหลัก 8 เท่าโดยไม่มีบริบท</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i3">&lt;1</span><span class="tm">10 น.</span><span class="ar">▸</span></summary>
+      <div class="bo"><dl>
+        <dt>ตำแหน่ง</dt><dd>การ์ด Dolphin Show — บัตร ฿700 / ท่าน · ออปชัน ฿6,000 / ท่าน</dd>
+        <dt>วิธีแก้</dt><dd>เพิ่มคำอธิบายว่าราคานี้ครอบคลุมอะไร (ระยะเวลา จำนวนคนต่อรอบ รูปถ่าย) และระบุว่าแทนบัตรหลักหรือบวกเพิ่ม</dd>
+      </dl></div></details>
+
+    <div class="roll"><span>เส้นทางคะแนน — แก้ทุกข้อในลิสต์นี้</span>
+      <span><b>36</b> → <b>~78</b> (แก้บั๊ก) → <b>100</b> (เก็บครบ) คะแนน</span></div>
+  </div>
+
+  <div class="pane p2">
+    <div class="pgrp">
+      <h4 class="ux">🧠 UX — Requirement &amp; Content</h4>
+      <li>CTA หลักชัดเจนและเจาะจงทุกจุด — “จองทริป”, “ดูทัวร์ทั้งหมด”, “สอบถาม” ไม่มี “Learn More” ลอยๆ</li>
+      <li>รีวิวรวมมีลิงก์ Google Maps ที่กดตรวจสอบได้จริง และแสดงคะแนน 4.1 ตามความจริง</li>
+      <li>ระบุหน่วยราคาชัดเจนทุกจุด — “/ ท่าน”, “/ คัน”, “/ 30 นาที”, “/ ที่นั่ง”</li>
+      <li>รถรับส่งสนามบินอธิบายชัดว่าเหมาต่อคันไม่คิดต่อหัว ซึ่งเป็นจุดที่ลูกค้าเข้าใจผิดบ่อย</li>
+      <li>ระบุข้อจำกัดตามฤดูกาลตรงไปตรงมา — สิมิลันเปิดเฉพาะ ต.ค.–พ.ค. และแนะนำให้จองล่วงหน้า</li>
+      <li><b>รอบนี้เพิ่ม</b> กิจกรรมเสริมเกาะราชา 6 รายการพร้อมราคาและระบุว่า “จ่ายเพิ่มหน้างาน”</li>
+      <li><b>รอบนี้เพิ่ม</b> เงื่อนไขเด็กของ Dolphin Show, Siam Niramit และเฟอร์รี่</li>
+      <li><b>รอบนี้เพิ่ม</b> “สิ่งที่ควรเตรียม” ของเจ็ตสกีและแคมป์ช้าง ช่วยลดคำถามซ้ำทาง LINE</li>
+      <li>ตารางเวลารับแคมป์ช้างละเอียดถึงระดับโซนพื้นที่ และแจกแจงพื้นที่บวกค่ารถ +฿1,500 อย่างโปร่งใส</li>
+
+      <h4 class="ux">🧠 UX — IA &amp; Navigation (เต็ม 100)</h4>
+      <li>เมนู 8 รายการชี้ไป section ที่มีอยู่จริงและชื่อตรงกับเนื้อหาทุกรายการ</li>
+      <li>ลำดับหน้าเป็นเหตุเป็นผล — hero → หมวด → เกมจับคู่ → แพ็กเกจ → เรื่องราว → ทำไมเรา → แกลเลอรี → รีวิว → ติดต่อ</li>
+      <li>Footer ครบถ้วนผิดปกติในทางที่ดี — ที่อยู่พร้อมแผนที่, LINE, WhatsApp, โทร, อีเมล, เวลาทำการ, ใบอนุญาต, เมนูหมวดสินค้า, นโยบาย</li>
+      <li>มีหน้านโยบายความเป็นส่วนตัวและข้อกำหนดและเงื่อนไขแยกหน้า พร้อมลิงก์จาก footer</li>
+
+      <h4 class="tc">⚙️ Technical</h4>
+      <li>ภาพเกือบทั้งหมดเป็น <code>.webp</code> แสดงว่ามีการ optimize มาแล้ว</li>
+      <li>มี Page Title และ Meta Description ที่เขียนมาอย่างตั้งใจ มีคีย์เวิร์ดครบ</li>
+      <li>เนื้อหาสำคัญเป็นข้อความจริง ไม่ถูกฝังอยู่ในรูปภาพ</li>
+
+      <h4 class="ui">🎨 UI (ที่ตรวจได้จาก URL)</h4>
+      <li>มี skip link “ข้ามไปเนื้อหาหลัก” ซึ่งเว็บส่วนใหญ่ไม่ทำ</li>
+      <li>มี H1 เพียงหัวข้อเดียวและลำดับ heading ถูกต้อง</li>
+      <li>ภาพแต่ละการ์ดตรงกับเนื้อหาสินค้าจริง ไม่มีการวนใช้ภาพเดิมข้ามสินค้า</li>
+    </div>
+  </div>
+
+  <div class="pane p3">
+    <table>
+      <thead><tr><th style="width:15%">กลุ่ม</th><th style="width:26%">รายการ</th><th style="width:25%">เหตุผล</th><th>วิธีตรวจ</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tg t-ux">UX</span></td><td>UX3 Flow, States &amp; Interaction <span class="sd">(6 คะแนน)</span></td><td>ต้องกดจริง — ไม่มีข้อใดตรวจได้จาก URL</td><td>เดิน flow จนจบ · ตรวจ 6 states ของเกมและ filter · edge case ข้อความยาว/ไม่มีผลลัพธ์</td></tr>
+        <tr><td><span class="tg t-ui">UI</span></td><td>UI1 Design System &amp; Visual <span class="sd">(10 คะแนน)</span></td><td>ไม่มี CSS/source และไม่มี CI guideline ของลูกค้า</td><td>ดึงค่า hex / font-family ทั้งหมดมาเทียบ CI · ตรวจ component ซ้ำและ spacing scale</td></tr>
+        <tr><td><span class="tg t-ui">UI</span></td><td>UI2 Responsive Layout <span class="sd">(8 คะแนน)</span></td><td>เห็นแค่ viewport meta</td><td>เปิด 375/768/1440/1920 px — เน้นกริดการ์ด 25 ใบ, filter tabs, ตารางเวลารับ, ปุ่มลอย</td></tr>
+        <tr><td><span class="tg t-ux">UX</span></td><td><b>เกมจับคู่ทริป 3 คำถาม</b></td><td>เห็นแต่โครงใน DOM (01/03, เริ่มใหม่)</td><td>เล่นทุกเส้นทางคำตอบ ตรวจว่า “เริ่มใหม่” รีเซ็ตจริง และผลลัพธ์พาไปการ์ดที่มีอยู่จริง</td></tr>
+        <tr><td><span class="tg t-ux">UX</span></td><td><b>ปุ่มสลับภาษา TH / EN</b></td><td>เห็นแต่ปุ่มใน DOM</td><td>สลับเป็น EN ตรวจว่าแปลครบทุก section หรือแค่บางส่วน · ปี © 2569 ต้องเปลี่ยนเป็น 2026 ในภาษาอังกฤษ — สำคัญเพราะกลุ่มเป้าหมายเป็นต่างชาติ</td></tr>
+        <tr><td><span class="tg t-ux">UX</span></td><td>Filter หมวดทัวร์ 8 ปุ่ม</td><td>ต้องกดจริง</td><td>กดทุกหมวด ตรวจว่ากรองถูกและมีสถานะ “ไม่พบรายการ” ถ้าหมวดว่าง</td></tr>
+        <tr><td><span class="tg t-ui">UI</span></td><td>Timeline “หนึ่งวันสไตล์คนภูเก็ต”</td><td>render เป็นตัวเลขลอย 07:00 08:30 …</td><td>ตรวจว่าเป็นแผนที่/timeline แบบสมบูรณ์ ไม่ใช่ element ที่ยังไม่เสร็จ</td></tr>
+        <tr><td><span class="tg t-ux">UX</span></td><td><b>นโยบายยกเลิกและเลื่อนทริป</b></td><td>อยู่ใน <code>terms.html</code> ซึ่งยังไม่ได้ตรวจทั้งสองรอบ</td><td>เปิด terms.html ตรวจว่ามีเงื่อนไขยกเลิก คืนเงิน และกรณีทะเลปิด/มรสุมครบไหม — ธุรกิจทัวร์ทางทะเลจำเป็นมาก</td></tr>
+        <tr><td><span class="tg t-tc">Tech</span></td><td>สิทธิ์การใช้ภาพและโลโก้</td><td>ตรวจจากภาพไม่ได้</td><td>ยืนยันกับลูกค้าว่าภาพ 25+ ใบถ่ายเองหรือซื้อสิทธิ์แล้ว · โลโก้ KBank ใช้ตามแนวทางของธนาคาร</td></tr>
+      </tbody>
+    </table>
+    <div class="warn">⚠️ กลุ่ม UI ตรวจได้แค่ 14 จาก 32 คะแนน — <b>คะแนน UI 0 ในรอบนี้ไม่ได้แปลว่างานดีไซน์แย่</b> แต่แปลว่ายังพิสูจน์ไม่ได้ ต้องเปิด browser หรือรันใน Claude Code จึงจะได้คะแนนที่มีความหมาย</div>
+  </div>
+
+  <div class="pane p4">
+    <table>
+      <thead><tr><th style="width:36%">Artifact ต้นน้ำ (🟨 Project)</th><th style="width:14%">สถานะ</th><th>ผลต่อการตรวจ</th></tr></thead>
+      <tbody>
+        <tr><td>Project Card / Brief + AC</td><td class="st sn">ไม่มี</td><td>ตรวจไม่ได้ว่า deliverable ครบตาม scope และไม่เกิน scope</td></tr>
+        <tr><td>IA / Sitemap</td><td class="st sn">ไม่มี</td><td>ตรวจได้แค่ “nav ใช้ง่ายไหม” ไม่ใช่ “ตรง IA ที่วางไว้ไหม”</td></tr>
+        <tr><td>User Flow</td><td class="st sn">ไม่มี</td><td>ตรวจไม่ได้ว่า flow จับคู่ทริป → แพ็กเกจ → LINE ครบตามที่ออกแบบ</td></tr>
+        <tr><td>Brand / CI Guideline ของลูกค้า</td><td class="st sn">ไม่มี</td><td>ตรวจ deviation ของสี ฟอนต์ โลโก้ ไม่ได้ — ทั้งที่พบสัญญาณแบรนด์ไม่สอดคล้องในโซเชียลแล้ว</td></tr>
+        <tr><td>Design Spec + variant ที่ลูกค้าเลือก</td><td class="st sn">ไม่มี</td><td>ตรวจไม่ได้ว่าทำตาม variant ที่ตกลงใน Stage 2</td></tr>
+        <tr><td>State / Edge case list</td><td class="st sn">ไม่มี</td><td>ไม่มีเกณฑ์ว่าเกมและ filter ต้องมี state อะไรบ้าง</td></tr>
+        <tr><td>Staging URL</td><td class="st sy">มี</td><td>เข้าได้จากภายนอก ตรวจเนื้อหาได้</td></tr>
+        <tr><td>Deploy checklist + Test Scenario</td><td class="st sn">ไม่มี</td><td>ไม่มีสคริปต์ให้ลูกค้าเดินทดสอบตอน UAT</td></tr>
+        <tr><td><b>Improvement Log รอบที่ 1</b></td><td class="st sn">ไม่มี</td><td><b>สำคัญรอบนี้</b> — ไม่มีบันทึกว่าข้อ High 5 ข้อจากรอบก่อนตัดสินใจไม่แก้ หรือยังไม่ได้แก้ ทำให้ตามงานไม่ได้</td></tr>
+        <tr><td>Handoff Section F (F1 / F2)</td><td class="st sn">ไม่มี</td><td>ยังไม่มีเอกสารส่งต่อ</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <b>สรุป:</b> มีแค่ staging URL — ขาด artifact ต้นน้ำทั้งหมด ตรวจได้เฉพาะคุณภาพที่มองเห็นจากหน้าเว็บ
+      ยืนยันไม่ได้ว่าตรงกับที่ตกลงกับลูกค้า ซึ่งเป็นหัวใจของ Project track<br>
+      <b style="color:#D93025">ข้อสังเกตสำคัญของรอบที่ 2:</b> การไม่มี improvement log ทำให้ไม่รู้ว่าข้อ High ที่ค้างอยู่ 5 ข้อเป็นเพราะยังไม่ได้ทำ หรือลูกค้าตัดสินใจไม่แก้ — <b>ควรเริ่มทำ log ก่อนเข้ารอบที่ 3</b> เพราะ Project track มี UAT budget จำกัด (M = 2 รอบ) และรอบนี้ใช้ไปแล้ว 2 รอบ<br><br>
+      <b class="lb">ข้อมูลที่ได้รับ</b> · URL, track (Project), ประเภท (landing page)<br>
+      <b class="lb">สมมติฐานที่ใช้ตรวจ</b> · Type = 🅐 Information เพราะไม่มีตะกร้าหรือ checkout บนเว็บ ทุก CTA ไปที่ LINE (ประเด็นราคาและนโยบายยังรายงานให้ แต่ไม่คิดคะแนนในชุด E-Commerce) · Size = M · Stage = ก่อนส่งลูกค้า UAT · เป้าหมาย = ให้ข้อมูลทัวร์และส่งคนเข้า LINE
+    </div>
+    <table style="margin-top:2px">
+      <thead><tr><th colspan="2">📦 ความพร้อมส่งมอบ — สิ่งที่ต้องเคลียร์ก่อนรอบที่ 3</th></tr></thead>
+      <tbody>
+        <tr><td style="width:28%">ต้องขอจากลูกค้า</td><td>URL เพจ Facebook ที่ถูกต้อง · ชุดเวลาทำการที่เป็นความจริง · จำนวนทริปจริงเพื่อแก้ตัวเลข 40+ · <b>ที่มาของคะแนนรายทริป 4.6–4.9</b> · ยืนยันว่าราคารวม VAT หรือไม่ · ราคาเด็กของทัวร์เกาะ · ราคาของ 7 รายการที่ยังเป็น “สอบถามราคา” · ยืนยันสิทธิ์การใช้ภาพ</td></tr>
+        <tr><td>ต้องตัดสินใจร่วมกัน</td><td>จะแสดงเลขบัญชีบนหน้า public ต่อหรือย้ายไปแจ้งในแชท · จุดยืนเรื่องกิจกรรมโลมาให้สอดคล้องกับที่ประกาศไว้เรื่องช้าง · จะเติมราคาให้ 7 รายการที่เหลือหรือคงไว้เพื่อเก็บ lead</td></tr>
+        <tr><td>ต้องทำฝั่งทีม</td><td><b>เริ่มทำ improvement log</b> บันทึกทุกข้อจากรอบ 1–2 พร้อมสถานะ · เขียน test scenario เน้นเกมจับคู่ทริปและปุ่มสลับภาษา · แนบ deploy checklist · <b>ตรวจ UI บน browser จริงก่อนรอบหน้า</b> เพราะรอบนี้กลุ่ม UI ยังพิสูจน์ไม่ได้เลย</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ==== แท็บ 🕐 ประวัติ — ไทม์ไลน์ตรวจซ้ำ (มีเฉพาะรายงาน "ตรวจซ้ำ" · รอบแรกไม่ต้องมีแท็บนี้) ==== -->
+  <div class="pane p5">
+    <div class="hist">
+      <div class="hnote">บันทึกทุกรอบที่ตรวจ — คะแนนรวม/รายกลุ่ม + สิ่งที่เปลี่ยนแต่ละรอบ · รอบล่าสุดอยู่บนสุด · <b>ตรวจซ้ำต้องแสดง Δ ของทั้ง 3 กลุ่มและคะแนนรวม</b> (ย้ายมาจากการ์ดสรุปด้านบน)</div>
+
+      <div class="hitem now">
+        <span class="hdot"></span>
+        <div class="hrd"><span class="rn">รอบ 2</span><span class="rdate">2 ก.ย. 2026</span>
+          <span class="rtag cur">รอบนี้</span></div>
+        <div class="hsc">
+          <span class="hov">คะแนนรวม 28 → <b>36</b></span><span class="up">▲+8</span>
+          <span class="hg">🧠 UX 44 → 53 <span class="up">▲+9</span></span>
+          <span class="hg">🎨 UI 0 → 0 <span class="fl">—</span></span>
+          <span class="hg">⚙️ Tech 15 → 27 <span class="up">▲+12</span></span>
+        </div>
+        <ul class="hchg">
+          <li>✅ <b>แก้จากรอบก่อน (dev แก้จริง):</b> ระบุที่มาของคะแนนรีวิว · รวมชุดเวลาทำการให้ตรงกันทั้งหน้า · เพิ่ม alt ให้รูปหลัก</li>
+          <li>↩︎ <b>คืนคะแนนให้ผ่าน (ลูกค้า/ทีมยืนยัน):</b> canonical/og ชี้โดเมนจริง = งานตั้งค่าตอน deploy (ทีมยืนยัน → ผ่าน)</li>
+          <li>⏳ <b>ยังค้าง (ยังไม่แก้):</b> ยังไม่เปิด browser ตรวจ UI จริง (UI ยังได้ 0) · ตัวเลข “40+ ทริป” ยังตรวจสอบไม่ได้</li>
+        </ul>
+      </div>
+
+      <div class="hitem">
+        <span class="hdot"></span>
+        <div class="hrd"><span class="rn">รอบ 1</span><span class="rdate">26 ส.ค. 2026</span>
+          <span class="rtag base">baseline</span></div>
+        <div class="hsc">
+          <span class="hov">คะแนนรวม <b>28</b></span>
+          <span class="hg">🧠 UX 44</span><span class="hg">🎨 UI 0</span><span class="hg">⚙️ Tech 15</span>
+        </div>
+        <ul class="hchg">
+          <li>🔍 รีวิวแรก — พบ 6 High · 8 Medium · 4 Low · กลุ่ม UI ตรวจไม่ได้เพราะรีวิวผ่าน URL อย่างเดียว (ต้องเปิด browser/probe)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==== แท็บ 📸 ภาพประกอบ (บังคับมีทุกรายงาน) — ฝัง base64 data-URI ให้เปิดไฟล์เดี่ยวได้ ==== -->
+  <div class="pane p6">
+    <div class="shots">
+      <h4>ภาพรวมแต่ละ breakpoint — ส่วนบนของหน้า · 4 ขนาด</h4>
+      <div class="bpr">
+        <figure><img src="data:image/jpeg;base64,…" alt="hero 375px"><figcaption><b>375px</b> · มือถือ</figcaption></figure>
+        <figure><img src="data:image/jpeg;base64,…" alt="hero 768px"><figcaption><b>768px</b> · แท็บเล็ต</figcaption></figure>
+        <figure><img src="data:image/jpeg;base64,…" alt="hero 1440px"><figcaption><b>1440px</b> · เดสก์ท็อป</figcaption></figure>
+        <figure><img src="data:image/jpeg;base64,…" alt="hero 1920px"><figcaption><b>1920px</b> · จอกว้าง</figcaption></figure>
+      </div>
+      <h4>จุดที่พบปัญหา — ครอปซูมจากการวัดจริง</h4>
+      <figure class="shotfig"><img src="data:image/jpeg;base64,…" alt="evidence"><figcaption>บรรยายจุดปัญหาที่เห็นในภาพ พร้อมตัวเลขที่วัดได้ เช่น contrast <b>2.1</b> หรือ touch target <b>28×28</b></figcaption></figure>
+    </div>
+    <div class="shotnote">ภาพครอปจากการรัน probe จริง (playwright) · หมายเหตุ false positive (พื้นภาพ/section เข้ม) ไม่นับคะแนน</div>
+  </div>
+</div>
+
+<div class="foot">
+  สร้างโดย skill <code>web-quality-review</code> v5.0 · Sellsuki UXUI Standard<br>
+  🟨 Project อ้างอิง <code>sellsuki-project-standard</code>
+</div>
+
+</div>
+</body>
+</html>
