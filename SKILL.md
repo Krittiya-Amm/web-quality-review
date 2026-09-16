@@ -75,12 +75,21 @@ Product ที่ขาด Persona Test ใน M/L = **ผิดกฎ A1/A5** �
 - ระวัง: ถ้าอยู่ในสภาพแวดล้อมที่ network มี allowlist โดเมน การเข้าเว็บ live จะได้ `403 host_not_allowed` — ทดสอบก่อนด้วย `curl -sSI <url>` แล้วดู header `x-deny-reason` · ถ้าโดนบล็อก ให้ขอไฟล์ source มาเสิร์ฟ localhost แทน หรือแจ้งผู้ใช้ให้ติดต่อ organization owner เพิ่มโดเมนเข้า allowlist
 
 ### ใช้ `assets/ui-probe.js` เพื่อวัดค่า UI จริง (ทำให้คะแนน UI มีความหมาย)
-สคริปต์นี้เก็บค่าที่ตาคนวัดเองไม่ได้ ใช้ได้ทั้ง 3 ทางโดยผลลัพธ์เหมือนกัน:
-- **Claude Code / playwright** — `await page.evaluate(uiProbe)`
-- **Claude in Chrome** — วางลง `javascript_tool`
+สคริปต์นี้เก็บค่าที่ตาคนวัดเองไม่ได้
+
+**วิธีหลักใน Claude Code — รัน `scripts/run-ui-probe.py` อย่าเขียน playwright เอง**
+```bash
+python3 <โฟลเดอร์สกิล>/scripts/run-ui-probe.py <URL หรือ path ไฟล์> --out ./qa-output
+```
+ตัวรันจะวน 375 / 768 / 1440 / 1920 px ให้เอง แล้วออก `summary.md` + `probe-<w>.json` + `shot-<w>.png`
+ต้องมี playwright ก่อน: `pip install playwright && playwright install chromium`
+**ให้อ่าน `summary.md` เป็นอันดับแรก** แล้วค่อยเปิด `probe-*.json` เมื่อต้องการ selector หรือคู่สีของ finding แต่ละข้อ
+
+ทางอื่นที่ได้ผลลัพธ์เหมือนกันเมื่อรัน python ไม่ได้:
+- **Claude in Chrome** — วาง `assets/ui-probe.js` ลง `javascript_tool`
 - **ให้ผู้ใช้รันเอง** — วางใน DevTools Console แล้วส่ง JSON กลับมา
 
-**ต้องรันซ้ำที่ 375 / 768 / 1440 / 1920 px** แล้วเทียบผลทุก breakpoint — ค่าที่เปลี่ยนตาม viewport คือหลักฐานว่า layout จัดใหม่จริงหรือแค่ย่อ desktop
+**ทุกทางต้องเก็บครบ 4 breakpoint** แล้วเทียบผลทุกขนาด — ค่าที่เปลี่ยนตาม viewport คือหลักฐานว่า layout จัดใหม่จริงหรือแค่ย่อ desktop
 
 สคริปต์คืนค่าที่แมปตรงกับ checklist:
 | ผลลัพธ์ | ใช้ตัดสินข้อไหน |
