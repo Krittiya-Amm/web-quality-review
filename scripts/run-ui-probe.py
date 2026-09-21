@@ -34,7 +34,12 @@ def main():
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
-        sys.exit("ยังไม่ได้ติดตั้ง playwright — รัน: pip install playwright && playwright install chromium")
+        sys.exit(
+            "ยังไม่ได้ติดตั้ง playwright — ติดตั้งก่อน:\n"
+            "  macOS / Linux : pip3 install playwright && python3 -m playwright install chromium\n"
+            "  Windows       : py -m pip install playwright && py -m playwright install chromium\n"
+            "  Linux ถ้าเปิด browser ไม่ขึ้น : sudo python3 -m playwright install --with-deps chromium"
+        )
 
     here = pathlib.Path(__file__).resolve().parent
     probe_path = here.parent / "assets" / "ui-probe.js"

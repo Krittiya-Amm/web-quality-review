@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Web Quality Review — Nessy Explores (Round 2)</title>
+<title>Web Quality Review — ชื่องาน (รอบที่ 2)</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -218,7 +218,7 @@ tbody tr:last-child td{border-bottom:none}
 .shots h4:first-child{margin-top:4px}
 .bpr{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:8px}
 .bpr figure{margin:0;background:#f8f7fb;border:1px solid var(--line);border-radius:10px;padding:9px}
-.bpr img{width:100%;height:140px;object-fit:cover;object-position:top;border:1px solid var(--line);border-radius:6px;display:block}
+.bpr img{width:100%;height:150px;object-fit:cover;object-position:top;border:1px solid var(--line);border-radius:6px;display:block}
 .bpr figcaption{font-size:12.5px;color:var(--muted);margin-top:9px;text-align:center}
 .bpr figcaption b{color:var(--ink2);font-family:'Roboto',sans-serif}
 .shotfig{display:flex;gap:18px;align-items:flex-start;margin:0 0 26px;padding:18px;
@@ -226,7 +226,8 @@ tbody tr:last-child td{border-bottom:none}
 .shotfig:last-of-type{margin-bottom:6px}
 .shotfig img{width:360px;max-width:46%;height:auto;border:1px solid var(--line);border-radius:8px;display:block;flex:0 0 auto}
 .shotfig figcaption{font-size:14px;color:var(--ink2);line-height:1.7;flex:1;padding-top:2px}
-.shotfig figcaption b{color:#D93025}
+.shotfig figcaption b{color:#137333}
+.shotfig figcaption b.bad{color:#D93025}
 @media(max-width:640px){.shotfig{flex-direction:column}.shotfig img{width:100%;max-width:none}}
 .shotnote{font-size:12.5px;color:var(--muted);padding:6px 20px 16px;line-height:1.6}
 @media(max-width:640px){.bpr{grid-template-columns:repeat(2,1fr)}}
@@ -236,34 +237,52 @@ tbody tr:last-child td{border-bottom:none}
 </style>
 </head>
 <body>
+<!-- ============================================================================
+     TEMPLATE กลาง — ใช้กับงานตรวจทุกชิ้น
+     ตัวเลขและข้อความทั้งหมดในไฟล์นี้เป็น "ตัวอย่างสมมติ" ที่คิดมาให้สอดคล้องกันทั้งไฟล์
+     วิธีใช้: คัดลอกโครงและ CSS ทั้งหมด แล้วแทนที่เนื้อหาด้วยผลตรวจจริง — ห้ามออกแบบใหม่
+     ตัวอย่างนี้จงใจทำเป็น "รอบที่ 2" จึงมี 6 แท็บ (มีแท็บ 🕐 ประวัติ)
+       · รอบแรก  = 5 แท็บ — ลบ input#t6 · label[for=t6] · .pane .p5 ทิ้ง แล้วย้ายภาพประกอบไปใช้คลาส .p5
+       · ตรวจซ้ำ = 6 แท็บ — ตามไฟล์นี้
+     ============================================================================ -->
 <div class="wrap">
 
 <div class="hd">
   <div class="mk">Q</div><h1>Web Quality Review</h1>
-  <a class="u" href="https://nessy-explores.vercel.app" target="_blank" rel="noopener">nessy-explores.vercel.app</a>
+  <a class="u" href="https://example.com" target="_blank" rel="noopener">example.com</a>
 </div>
 
 <div class="card">
   <div class="sum">
+    <!-- วงใหญ่ r=44 → เส้นรอบวง 276.46 · stroke-dasharray = (คะแนน% × 276.46) 276.46 -->
     <div class="g-lg">
       <svg width="104" height="104" viewBox="0 0 104 104">
-        <circle cx="52" cy="52" r="44" fill="var(--poor-bg)"/>
-        <circle cx="52" cy="52" r="44" fill="none" stroke="#F5C6C2" stroke-width="8"/>
-        <circle cx="52" cy="52" r="44" fill="none" stroke="var(--poor)" stroke-width="8"
-          stroke-linecap="round" stroke-dasharray="99.53 276.46"/>
+        <circle cx="52" cy="52" r="44" fill="var(--avg-bg)"/>
+        <circle cx="52" cy="52" r="44" fill="none" stroke="#F6DDAE" stroke-width="8"/>
+        <circle cx="52" cy="52" r="44" fill="none" stroke="var(--avg)" stroke-width="8"
+          stroke-linecap="round" stroke-dasharray="185.23 276.46"/>
       </svg>
-      <div class="v" style="color:var(--poor)">36</div>
+      <div class="v" style="color:#B06000">67</div>
     </div>
     <div class="sum-b">
-      <div class="bd" style="color:var(--poor)"><i class="sh tri"></i>POOR</div>
-      <!-- vd = แค่ verdict สั้นๆ: <emoji> <score> / 100 — <ชื่อ band> · ห้ามใส่ breakdown Blocker/High/UX/Tech ต่อท้าย -->
-      <div class="vd">🚫 36 / 100 — ยังไม่ควรส่งมอบ</div>
+      <!-- bd = ผลตัดสินแบบสั้น เขียนเป็นไทยได้ · ไอคอน .sh ต้องตรงกับ band: tri = 0–49 · sq = 50–89 · ci = 90–100
+           vd = <emoji> <คะแนน> / 100 — <คำตัดสินตามตาราง band ใน SKILL.md ขั้น 6> คำต่อคำ
+                ≥1 Blocker → 🚫 ห้าม merge/ship · 90–100 → ✅ พร้อม merge / ship · 80–89 → ⚠️ ควรแก้ Medium ก่อน
+                70–79 → 🔧 ต้องแก้ก่อน merge · <70 → 🚫 ยังไม่ควร ship   (🟨 Project ใช้ถ้อยคำคอลัมน์ Project)
+           ห้ามใส่ breakdown Blocker/High/UX/Tech ต่อท้าย vd -->
+      <div class="bd" style="color:#B06000"><i class="sh sq"></i>ยังไม่ควร SHIP · ต่ำกว่าเกณฑ์ 70</div>
+      <div class="vd">🚫 67 / 100 — ยังไม่ควร ship</div>
       <div class="cnt">
-        <span class="k1"><b>0</b> Blocker</span><span class="k2"><b>6</b> High</span>
-        <span class="k3"><b>8</b> Medium</span><span class="k4"><b>4</b> Low</span>
+        <span class="k1"><b>0</b> Blocker</span><span class="k2"><b>3</b> High</span>
+        <span class="k3"><b>4</b> Medium</span><span class="k4"><b>2</b> Low</span>
       </div>
     </div>
   </div>
+
+  <!-- วงกลาง r=34 → เส้นรอบวง 213.63 · สีเส้น track ของแต่ละกล่องคงไว้ เปลี่ยนเฉพาะเส้นคะแนนกับสีตัวเลข
+       .sc  = <คะแนนที่ได้> / <คะแนนเต็มที่ตรวจได้จริง> คะแนนที่ตรวจได้
+       .cvr = น้ำหนัก <เต็ม>% · รอบก่อน <คะแนนกลุ่มรอบก่อน> → <รอบนี้> (<Δ>) · <โน้ตสั้นๆ ว่าอะไรถูกตัดออก หรือวัดด้วยอะไร>
+              รอบแรก (ไม่มีรอบก่อน) ให้ตัดท่อนกลางทิ้ง เหลือ  น้ำหนัก 47% · <โน้ต> -->
 
   <div class="grp">
     <div class="gbox ux">
@@ -271,68 +290,76 @@ tbody tr:last-child td{border-bottom:none}
         <circle cx="38" cy="38" r="34" fill="#fff" opacity=".55"/>
         <circle cx="38" cy="38" r="34" fill="none" stroke="#C9DCFB" stroke-width="6"/>
         <circle cx="38" cy="38" r="34" fill="none" stroke="var(--avg)" stroke-width="6"
-          stroke-linecap="round" stroke-dasharray="113.22 213.63"/></svg>
-        <div class="v" style="color:#B06000">53</div></div>
+          stroke-linecap="round" stroke-dasharray="166.63 213.63"/></svg>
+        <div class="v" style="color:#B06000">78</div></div>
       <div><div class="lb">🧠 UX</div>
-        <div class="sc">18 / 34 คะแนนที่ตรวจได้</div>
-        <div class="cvr">เต็ม 40 · ตรวจได้ 34 · Flow &amp; States ตรวจไม่ได้</div></div>
+        <div class="sc">31 / 40 คะแนนที่ตรวจได้</div>
+        <div class="cvr">น้ำหนัก 47% · รอบก่อน 70 → 78 (+8) · UX3 Flow &amp; States ตรวจจากลิงก์ไม่ได้ — ตัดออกจากตัวหาร</div></div>
     </div>
     <div class="gbox ui">
       <div class="g-md"><svg width="76" height="76" viewBox="0 0 76 76">
         <circle cx="38" cy="38" r="34" fill="#fff" opacity=".55"/>
-        <circle cx="38" cy="38" r="34" fill="none" stroke="#E4CCFA" stroke-width="6"/></svg>
-        <div class="v" style="color:var(--poor)">0</div></div>
+        <circle cx="38" cy="38" r="34" fill="none" stroke="#E4CCFA" stroke-width="6"/>
+        <circle cx="38" cy="38" r="34" fill="none" stroke="var(--poor)" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="96.13 213.63"/></svg>
+        <div class="v" style="color:var(--poor)">45</div></div>
       <div><div class="lb">🎨 UI</div>
-        <div class="sc">0 / 14 คะแนนที่ตรวจได้</div>
-        <div class="cvr"><b>เชื่อถือได้ต่ำ</b> — เต็ม 32 ตรวจได้แค่ 14 เพราะไม่มี CSS/browser</div></div>
+        <div class="sc">17 / 38 คะแนนที่ตรวจได้</div>
+        <div class="cvr">น้ำหนัก 38% · รอบก่อน 32 → 45 (+13) · วัดด้วย probe ครบทั้ง 4 breakpoint</div></div>
     </div>
     <div class="gbox tc">
       <div class="g-md"><svg width="76" height="76" viewBox="0 0 76 76">
         <circle cx="38" cy="38" r="34" fill="#fff" opacity=".55"/>
         <circle cx="38" cy="38" r="34" fill="none" stroke="#D8DBDE" stroke-width="6"/>
-        <circle cx="38" cy="38" r="34" fill="none" stroke="var(--poor)" stroke-width="6"
-          stroke-linecap="round" stroke-dasharray="57.68 213.63"/></svg>
-        <div class="v" style="color:var(--poor)">27</div></div>
+        <circle cx="38" cy="38" r="34" fill="none" stroke="var(--good)" stroke-width="6"
+          stroke-linecap="round" stroke-dasharray="198.68 213.63"/></svg>
+        <div class="v" style="color:#137333">93</div></div>
       <div><div class="lb">⚙️ Technical</div>
-        <div class="sc">4 / 15 คะแนนที่ตรวจได้</div>
-        <div class="cvr">เต็ม 15 · T1 อย่างเดียว (ตรวจผ่าน URL)</div></div>
+        <div class="sc">14 / 15 คะแนนที่ตรวจได้</div>
+        <div class="cvr">น้ำหนัก 15% · รอบก่อน 95 → 93 (−2) · T1 ตรวจผ่าน URL ได้ครบ</div></div>
     </div>
   </div>
 
   <div class="meta">
-    <span class="chip pj"><i class="dot"></i>Project</span>
-    <span class="chip"><b>Type</b> <span class="cv">🅐 Information (landing page)</span></span>
+    <!-- ชิปแรกคือ Track เสมอ — 🟦 Product ใช้ class="chip r2" (น้ำเงิน) · 🟨 Project ใช้ class="chip pj" (เหลือง)
+         <span class="chip pj"><i class="dot"></i>Project</span>
+         รอบที่ตรวจ "ไม่ต้องทำชิปแยก" — ใส่รวมไว้ในชิป โมเดล เช่น "ตรวจซ้ำ รอบ 2 · รีวิวผ่านลิงก์ /100"
+         รอบแรกเขียนว่า "รีวิวผ่านลิงก์ /100" เฉยๆ -->
+    <span class="chip r2"><i class="dot"></i>Product</span>
+    <span class="chip"><b>Type</b> <span class="cv">🅐 Information</span></span>
     <span class="chip"><b>Size</b> <span class="cv">M</span></span>
     <span class="chip"><b>Method</b> <span class="cv">URL + probe 4 bp</span></span>
-    <span class="chip"><b>โมเดล</b> <span class="cv">รีวิวผ่านลิงก์ /100</span></span>
-    <span class="chip date">2 ก.ย. 2026</span>
+    <span class="chip"><b>โมเดล</b> <span class="cv">ตรวจซ้ำ รอบ 2 · รีวิวผ่านลิงก์ /100</span></span>
+    <span class="chip date">21 ก.ย. 2026</span>
   </div>
 
+  <!-- คะแนนหมวด = (ข้อผ่าน ÷ ข้อที่ตรวจได้จริง) × คะแนนเต็มของหมวด · ⏭️ ไม่นับทั้งตัวตั้งและตัวหาร
+       หมวดที่ตรวจไม่ได้ ใช้ .crw.nt แล้วใส่ "—" ห้ามใส่ 0 -->
   <div class="crow ux">
-    <div class="ghd">🧠 UX — ใช้งานได้และตอบโจทย์ <span class="tot">18 / 34</span></div>
+    <div class="ghd">🧠 UX — ใช้งานได้และตอบโจทย์ <span class="tot">31 / 40</span></div>
     <div class="clist">
-      <div class="crw"><span class="cn">UX1 Requirement &amp; Content</span><span class="cbar"><i style="width:25%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">25</span></div>
-      <div class="crw"><span class="cn">UX2 IA &amp; Navigation</span><span class="cbar"><i style="width:100%;background:var(--good)"></i></span><span class="cs" style="color:var(--good)">100</span></div>
+      <div class="crw"><span class="cn">UX1 Requirement &amp; Content</span><span class="cbar"><i style="width:74%;background:var(--avg)"></i></span><span class="cs" style="color:#B06000">74</span></div>
+      <div class="crw"><span class="cn">UX2 IA &amp; Navigation</span><span class="cbar"><i style="width:86%;background:var(--avg)"></i></span><span class="cs" style="color:#B06000">86</span></div>
       <div class="crw nt"><span class="cn">UX3 Flow, States &amp; Interaction</span><span class="cbar"></span><span class="cs">—</span></div>
-      <div class="crw"><span class="cn">UX4 ชุดเฉพาะ Information</span><span class="cbar"><i style="width:33%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">33</span></div>
+      <div class="crw"><span class="cn">UX4 ชุดเฉพาะ Information</span><span class="cbar"><i style="width:71%;background:var(--avg)"></i></span><span class="cs" style="color:#B06000">71</span></div>
     </div>
   </div>
 
   <div class="crow ui">
-    <div class="ghd">🎨 UI — หน้าตาและการนำเสนอ <span class="tot">0 / 14</span></div>
+    <div class="ghd">🎨 UI — หน้าตาและการนำเสนอ <span class="tot">17 / 38</span></div>
     <div class="clist">
-      <div class="crw nt"><span class="cn">UI1 Design System &amp; Visual</span><span class="cbar"></span><span class="cs">—</span></div>
-      <div class="crw nt"><span class="cn">UI2 Responsive Layout</span><span class="cbar"></span><span class="cs">—</span></div>
-      <div class="crw"><span class="cn">UI3 Typography, Contrast &amp; Media</span><span class="cbar"><i style="width:0%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">0</span></div>
-      <div class="cnote">ตรวจ UI จาก URL ได้แค่ alt text และรูปโหลดได้ไหม · <b style="color:#B06000">ต้องเปิด browser (playwright/probe) จึงจะได้คะแนน UI ที่มีความหมาย</b></div>
+      <div class="crw"><span class="cn">UI1 Design System &amp; Visual</span><span class="cbar"><i style="width:50%;background:var(--avg)"></i></span><span class="cs" style="color:#B06000">50</span></div>
+      <div class="crw"><span class="cn">UI2 Responsive Layout</span><span class="cbar"><i style="width:33%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">33</span></div>
+      <div class="crw"><span class="cn">UI3 Typography, Contrast &amp; Media</span><span class="cbar"><i style="width:47%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">47</span></div>
+      <div class="cnote">คะแนนกลุ่มนี้มาจากการรัน probe จริง 4 breakpoint · <b>ถ้ารัน probe ไม่ได้ ต้องรายงานทั้งกลุ่มเป็น ⚪ Not Tested ห้ามให้ 0</b></div>
     </div>
   </div>
 
   <div class="crow tc">
-    <div class="ghd">⚙️ Technical <span class="tot">4 / 15</span></div>
+    <div class="ghd">⚙️ Technical <span class="tot">14 / 15</span></div>
     <div class="clist">
-      <div class="crw"><span class="cn">T1 Functional, Perf &amp; SEO</span><span class="cbar"><i style="width:27%;background:var(--poor)"></i></span><span class="cs" style="color:var(--poor)">27</span></div>
-      <div class="cnote">ตรวจผ่าน URL อย่างเดียว · <b>ไม่มีหมวดที่ต้องเปิด repo แล้ว (Technical = T1 อย่างเดียว)</b></div>
+      <div class="crw"><span class="cn">T1 Functional, Perf &amp; SEO</span><span class="cbar"><i style="width:93%;background:var(--good)"></i></span><span class="cs" style="color:#137333">93</span></div>
+      <div class="cnote">ตรวจผ่าน URL อย่างเดียว · <b>Technical = T1 หมวดเดียว (ไม่มีหมวดที่ต้องเปิด repo)</b></div>
     </div>
   </div>
 
@@ -350,326 +377,279 @@ tbody tr:last-child td{border-bottom:none}
   <input type="radio" name="tab" id="t5">
   <input type="radio" name="tab" id="t6">
   <div class="tabbar">
-    <label for="t1">ปัญหาที่ต้องแก้ <b>18</b></label>
-    <label for="t2">ผ่านแล้ว <b>17</b></label>
+    <label for="t1">ปัญหาที่ต้องแก้ <b>9</b></label>
+    <label for="t2">ผ่านแล้ว <b>16</b></label>
     <label for="t3">ตรวจไม่ได้</label>
-    <label for="t4">ความพร้อม &amp; ส่งมอบ</label>
+    <label for="t4">ความพร้อม &amp; รอบถัดไป</label>
     <label for="t5">🕐 ประวัติ</label>
     <label for="t6">📸 ภาพประกอบ</label>
   </div>
 
+  <!-- ==== แท็บ 1 · ปัญหาที่ต้องแก้ — เรียง Blocker → High → Medium → Low ====
+       ป้ายในหัวข้อ: .nw = ข้อใหม่รอบนี้ · .cr = ค้างจากรอบก่อน / แก้บางส่วน / ถอยหลัง
+       .im = คะแนนที่จะได้คืนถ้าแก้ (i1 High · i2 Medium · i3 Low) · .tm = เวลาที่คาดว่าใช้แก้
+       ทุกข้อต้องมีอย่างน้อย ตำแหน่ง / ผลกระทบ / วิธีแก้ — "ผลกระทบ" ต้องบอกว่ากระทบใครอย่างไร ไม่ใช่แค่ว่าผิดกฎ -->
   <div class="pane p1">
-    <div class="gh">🔴 High — 5 ข้อค้างจากรอบที่ 1 · 1 ข้อใหม่</div>
+    <div class="gh">🔴 High — 1 ข้อใหม่ · 1 ข้อถอยหลัง · 1 ข้อค้างจากรอบที่ 1</div>
 
     <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">คะแนนรีวิวรายทริป 4.6–4.9 ขัดกับคะแนน Google 4.1 ของตัวเอง</span>
-      <span class="nw">ใหม่</span><span class="im i1">+4</span><span class="tm">1 ชม.</span><span class="ar">▸</span></summary>
+      <span class="t">ตัวเลขที่โฆษณาไม่ตรงกับสิ่งที่แสดงจริงในหน้าเดียวกัน</span>
+      <span class="nw">ใหม่</span><span class="im i1">+5</span><span class="tm">2 ชม.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>การ์ดทริป 12 ใบที่เพิ่มคะแนนเข้ามารอบนี้ — พีพี 4.9 · เจมส์บอนด์ 4.8 · ราชา-เฮ 4.7 · 7 เกาะ 4.8 · สิมิลัน 4.9 · เจ็ตสกี 4.9 · ล่องแก่ง 4.7 · ATV 4.6 · ซิปไลน์ 4.8 · แคมป์ช้าง 4.7</dd>
-        <dt>ผลกระทบ</dt><dd>section รีวิวของเว็บเองแสดง <b>4.1 จาก 339 รีวิวบน Google</b> แต่การ์ดทริปทุกใบให้ 4.6–4.9 ซึ่งสูงกว่าค่าเฉลี่ยของธุรกิจทั้งหมด · ไม่มีการระบุว่าคะแนนรายทริปมาจากไหน (Google ต่อรายการ? ระบบภายใน? กี่รีวิว?) · เป็นความเสี่ยงเดียวกับ “40+ ทริป” คือตัวเลขที่ตรวจสอบไม่ได้และขัดกับข้อมูลอื่นในหน้าเดียวกัน — บนธุรกิจที่รับเงินโอนล่วงหน้า ความไม่สอดคล้องแบบนี้ทำลายความน่าเชื่อถือที่เว็บสร้างมาดีแล้ว</dd>
-        <dt>วิธีแก้</dt><dd>ระบุที่มาและจำนวนรีวิวใต้คะแนนทุกใบ เช่น “4.9 · จาก 42 รีวิว” · ถ้าเป็นคะแนนจากระบบภายในต้องบอกว่าเป็นคะแนนจากลูกค้า Nessy เอง · ถ้าไม่มีข้อมูลจริงรองรับ ให้เอาออกและคงเฉพาะคะแนน Google รวมที่ตรวจสอบได้</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">เวลาทำการขัดแย้งกันเองในหน้าเดียว</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+4</span><span class="tm">20 น.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>section ติดต่อเขียน “ตอบทุกวัน 08:00–22:00 น.” · footer เขียน “จ.–พฤ. 11:00–20:00 · ศ. 11:00–18:00 · ส. 19:00–22:00 · อา. 11:00–20:00”</dd>
-        <dt>ผลกระทบ</dt><dd>LINE เป็นช่องทางปิดการขายเดียว ลูกค้าที่ทัก 09:00 ตามที่ section ติดต่อบอกแล้วไม่มีใครตอบจนถึง 11:00 จะเข้าใจว่าร้านไม่ตอบ · เวลาเสาร์ที่เปิดแค่ 19:00–22:00 ขัดกับ “ทุกวัน 08:00–22:00” อย่างชัดเจน</dd>
-        <dt>วิธีแก้</dt><dd>เลือกชุดเวลาที่เป็นความจริงชุดเดียวแล้วใช้ให้ตรงกันทั้งสองจุด · ถ้าเวลาตอบแชทต่างจากเวลาเปิดออฟฟิศ ให้แยกป้ายให้ชัดว่า “ออฟฟิศป่าตอง” กับ “ตอบแชท” คนละเวลา</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">“40+ ทริปและกิจกรรม” แต่หน้าเว็บแสดงจริง 25 รายการ</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+4</span><span class="tm">15 น.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>trust bar ใต้ hero</dd>
-        <dt>ผลกระทบ</dt><dd>นับการ์ดในหมวด “รายการแพ็กเกจทั้งหมด” รอบนี้ยังได้ 25 รายการเท่าเดิม ตัวเลขที่โฆษณาไม่ตรงกับสิ่งที่ผู้ใช้เห็น</dd>
-        <dt>วิธีแก้</dt><dd>แก้เป็นตัวเลขจริง หรือถ้า 40+ นับรวมออปชันย่อยและตัวเลือกเรือ ให้เขียนให้ชัด เช่น “25 ทริป · 40+ ตัวเลือกและออปชัน” — รอบนี้เพิ่มออปชันเสริมของเกาะราชาและโชว์เข้ามาอีก ซึ่งช่วยให้เขียนแบบหลังได้จริง</dd>
+        <dt>ตำแหน่ง</dt><dd>แถบสถิติใต้ hero เขียน “40+ รายการ” · นับการ์ดในส่วน “รายการทั้งหมด” ได้จริง 25 ใบ</dd>
+        <dt>ผลกระทบ</dt><dd>ผู้ใช้เห็นความไม่ตรงกันได้ในหน้าจอเดียวโดยไม่ต้องเลื่อน — ตัวเลขที่ตรวจสอบเองได้แล้วพบว่าไม่จริง ทำลายความน่าเชื่อถือของตัวเลขอื่นทั้งหมดในหน้า รวมถึงราคาและคะแนนรีวิว</dd>
+        <dt>วิธีแก้</dt><dd>แก้เป็นตัวเลขจริง หรือถ้า 40+ นับรวมตัวเลือกย่อยด้วย ให้เขียนให้ชัดว่านับอะไร เช่น “25 รายการ · 40+ ตัวเลือก”</dd>
       </dl></div></details>
 
     <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-tc">Tech</span>
-      <span class="t">ลิงก์ Facebook ชี้ไปหน้าค้นหา ไม่ใช่เพจ และชื่อที่ค้นหาไม่ตรงแบรนด์</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+4</span><span class="tm">10 น.</span><span class="ar">▸</span></summary>
+      <span class="t">og:image หายไปหลัง deploy รอบนี้ — รอบที่ 1 เคยมี</span>
+      <span class="cr">ถอยหลัง</span><span class="im i1">+4</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>ไอคอนโซเชียลใน footer — <code>facebook.com/search/top?q=Phuket%20with%20Nessy%20Island%20Life%20%26%20Adventures</code></dd>
-        <dt>ผลกระทบ</dt><dd>กดแล้วไปหน้าผลการค้นหา ผู้ใช้ต้องเดาเองว่าอันไหนคือเพจจริง · ชื่อที่ค้นหาไม่ตรงกับแบรนด์ “Nessy Explores” ที่ใช้ทั้งเว็บ ทำให้ดูเหมือนคนละธุรกิจ — เป็นสัญญาณที่ลดความน่าเชื่อถือทันทีสำหรับเว็บที่รับเงินโอน</dd>
-        <dt>วิธีแก้</dt><dd>เปลี่ยนเป็น URL เพจจริงรูปแบบ <code>facebook.com/&lt;page-username&gt;</code> · ถ้าชื่อเพจยังเป็นชื่อเก่า ควรคุยกับลูกค้าเรื่องเปลี่ยนชื่อเพจให้ตรงแบรนด์</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-tc">Tech</span>
-      <span class="t">ไม่พบ Open Graph image และ structured data</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+4</span><span class="tm">1.5 ชม.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd><code>&lt;head&gt;</code> — พบเพียง <code>title</code>, <code>meta description</code>, <code>theme-color</code>, <code>viewport</code></dd>
-        <dt>ผลกระทบ</dt><dd>ทุก CTA ส่งคนเข้า LINE และคนส่งลิงก์ต่อกันใน LINE เมื่อไม่มี <code>og:image</code> ลิงก์จะขึ้นเป็นกล่องเปล่า อัตราการกดตกอย่างมีนัยสำคัญ · การไม่มี structured data (<code>LocalBusiness</code>, <code>TouristTrip</code>, <code>AggregateRating</code>) ทำให้เสียโอกาสขึ้น rich result ทั้งที่เว็บมีข้อมูลครบพร้อมใช้ — ราคา, คะแนนรีวิว, ที่อยู่, เวลาทำการ</dd>
-        <dt>วิธีแก้</dt><dd>เพิ่ม <code>og:image</code> 1200×630 (ใช้ภาพเกาะที่มีอยู่ได้), <code>og:title/description/url</code>, <code>twitter:card</code>, <code>canonical</code> · เพิ่ม JSON-LD <code>LocalBusiness</code> + <code>AggregateRating</code> · <b>ทำพร้อมกับแก้เรื่องคะแนนรายทริปด้วย</b> เพราะ structured data ที่ใส่คะแนนไม่มีที่มาอาจถูก Google ปรับ</dd>
+        <dt>ตำแหน่ง</dt><dd><code>&lt;head&gt;</code> — พบ <code>og:title</code> และ <code>og:description</code> แต่ไม่พบ <code>og:image</code> แล้ว</dd>
+        <dt>ผลกระทบ</dt><dd>เป็นสาเหตุเดียวที่ทำให้คะแนน Technical ลดจาก 95 เหลือ 93 ในรอบนี้ · ลิงก์ที่ถูกแชร์ในแชทและโซเชียลจะขึ้นเป็นกล่องเปล่า อัตราการกดตกอย่างมีนัยสำคัญ — สำคัญมากถ้าช่องทางหลักคือการส่งลิงก์ต่อกัน</dd>
+        <dt>วิธีแก้</dt><dd>ใส่ <code>og:image</code> ขนาด 1200×630 กลับเข้าไป · เพิ่มการตรวจ meta ลงใน deploy checklist เพื่อไม่ให้หายอีกรอบหน้า</dd>
       </dl></div></details>
 
     <details><summary><span class="ic"><i class="sh tri"></i></span><span class="tg t-ui">UI</span>
-      <span class="t">มีรูปภาพที่ src ว่างเปล่าท้ายหน้า — รูปแตกบน production</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+7</span><span class="tm">10 น.</span><span class="ar">▸</span></summary>
+      <span class="t">contrast ไม่ผ่าน WCAG AA 23 จุด — ส่วนใหญ่เป็นข้อความสีเทาอ่อนบนพื้นขาว</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i1">+5</span><span class="tm">3 ชม.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>ท้ายหน้า ใกล้ปุ่มลอย “สอบถาม” — พบ <code>&lt;img&gt;</code> ที่ไม่มี src และไม่มี alt</dd>
-        <dt>ผลกระทบ</dt><dd>น่าจะเป็นไอคอนของปุ่มลอย LINE ที่โหลดไม่ขึ้น จะแสดงเป็นกรอบรูปแตกค้างบนทุกหน้าจอ · ตำแหน่งนี้คือจุดที่ผู้ใช้กดเพื่อปิดการขาย จึงเห็นชัดที่สุด</dd>
-        <dt>คืนคะแนน</dt><dd>+7 สูงเพราะหมวด UI3 ตรวจได้แค่ 2 ข้อ คะแนนทั้งหมวดจึงผูกกับข้อนี้และข้อ alt text — ตัวเลขจะลดลงเมื่อตรวจ UI บน browser ได้ครบ</dd>
-        <dt>วิธีแก้</dt><dd>ใส่ src ที่ถูกต้อง หรือถ้าเป็นไอคอนตกแต่งให้เปลี่ยนไปใช้ SVG inline · ยืนยันด้วย DevTools Network tab หา request ที่ 404</dd>
+        <dt>ตำแหน่ง</dt><dd>probe ที่ 1440px — caption ใต้รูป, ข้อความรองในการ์ด, label ของฟอร์ม · ต่ำสุด <code>2.1 : 1</code> จาก <code>#9AA0A6</code> บน <code>#FFFFFF</code> (ดูภาพประกอบในแท็บ 📸)</dd>
+        <dt>ผลกระทบ</dt><dd>AA ต้องได้ 4.5:1 สำหรับข้อความปกติ และ 3:1 สำหรับข้อความ ≥ 18.66px · ที่ 2.1:1 คนสายตาปกติกลางแดดก็อ่านไม่ออก ไม่ใช่แค่ผู้พิการทางสายตา · ข้อความที่ติดปัญหาคือเงื่อนไขและราคาซึ่งเป็นข้อมูลที่ใช้ตัดสินใจ</dd>
+        <dt>คืนคะแนน</dt><dd>+5 เพราะ UI3 มี 17 คะแนน เป็นหมวดใหญ่ที่สุดของกลุ่ม UI ในเว็บประเภท 🅐 Information</dd>
+        <dt>วิธีแก้</dt><dd>เปลี่ยนสีข้อความรองจาก <code>#9AA0A6</code> เป็น <code>#5F6368</code> ขึ้นไป (ได้ 7.0:1) · รันสคริปต์ <code>run-ui-probe.py</code> ซ้ำเพื่อยืนยันว่าเหลือ 0 จุด</dd>
       </dl></div></details>
 
-    <div class="gh">🟡 Medium — ค้างจากรอบที่ 1 ทั้งหมด</div>
+    <div class="gh">🟡 Medium</div>
 
-    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">ไม่ระบุ VAT อย่างสม่ำเสมอ — โชว์ระบุครบ แต่ทัวร์เกาะไม่ระบุเลย</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+4</span><span class="tm">1 ชม.</span><span class="ar">▸</span></summary>
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ui">UI</span>
+      <span class="t">touch target เล็กกว่า 44px 6 จุดที่หน้าจอ 375px</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+2</span><span class="tm">1 ชม.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>Phuket FantaSea และ Carnival Magic ระบุ “ราคารวม VAT 7% แล้ว” ชัดเจน · ทัวร์เกาะ ดำน้ำ ผจญภัย และรถรับส่งทั้งหมดไม่ระบุ</dd>
-        <dt>ผลกระทบ</dt><dd>ลูกค้าที่ต้องการใบกำกับภาษีต้องถามซ้ำทุกครั้ง และเสี่ยงเข้าใจว่าราคาที่เห็นคือราคาสุทธิแล้วต้องจ่ายเพิ่มภายหลัง — สาเหตุข้อพิพาทที่พบบ่อยในธุรกิจทัวร์</dd>
-        <dt>วิธีแก้</dt><dd>ประกาศครั้งเดียวเด่นๆ ใน section แพ็กเกจว่า “ราคาทั้งหมดรวม VAT 7% แล้ว ยกเว้นที่ระบุไว้เป็นอย่างอื่น” — เร็วกว่าไปใส่ทีละการ์ด</dd>
+        <dt>ตำแหน่ง</dt><dd>probe ที่ 375px — ปุ่มปิด modal <code>28×28</code> · ไอคอนโซเชียลใน footer <code>32×32</code> (5 ไอคอนติดกัน) · ลิงก์ในเมนูย่อยสูง 30px</dd>
+        <dt>ผลกระทบ</dt><dd>ไอคอนโซเชียล 5 อันเรียงชิดกันที่ 32px ทำให้กดผิดอันเป็นเรื่องปกติ · ปุ่มปิด modal ที่กดไม่ติดคือจุดที่ผู้ใช้หงุดหงิดที่สุด เพราะออกจากหน้าไม่ได้</dd>
+        <dt>วิธีแก้</dt><dd>ขยายพื้นที่กดด้วย padding ให้ได้อย่างน้อย 44×44 โดยไม่ต้องขยายไอคอน · เพิ่มระยะห่างระหว่างไอคอนอย่างน้อย 8px</dd>
       </dl></div></details>
 
-    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">7 จาก 25 รายการขึ้น “สอบถามราคา” โดยไม่มีราคาเริ่มต้น</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+2</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
+    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ui">UI</span>
+      <span class="t">มี element ล้นขอบที่ 375px ทำให้เลื่อนหน้าไปทางขวาได้</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+2</span><span class="tm">2 ชม.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>ทะเลแหวก-กระบี่ · หมู่เกาะสุรินทร์ · ธารโบกขรณี-เกาะห้อง · Discover Scuba · กิจกรรมริมหาดป่าตอง · เมืองเก่าภูเก็ต · ตลาดเช้า &amp; หมู่บ้านชาวเล</dd>
-        <dt>ผลกระทบ</dt><dd>เมื่อ 18 รายการแสดงราคาแต่ 7 รายการไม่แสดง ผู้ใช้จะสงสัยว่าที่ไม่บอกเพราะแพงหรือเปล่า และเปรียบเทียบทริปไม่ครบ · น่าสังเกตว่า 4 ใน 7 รายการนี้เป็นรายการที่ติดป้าย “ใหม่” ซึ่งอาจยังไม่ได้ตั้งราคา</dd>
-        <dt>วิธีแก้</dt><dd>ใส่ราคาเริ่มต้น “เริ่ม ฿X,XXX” หรือช่วงราคา — การ์ดเฟอร์รี่ทำถูกแล้วด้วยป้าย “เริ่ม ฿1,200” ใช้รูปแบบเดียวกันได้เลย</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">ราคาออปชัน Phuket FantaSea ฿1,550 กำกวมว่าเป็นส่วนเพิ่มหรือราคารวม</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+2</span><span class="tm">20 น.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>การ์ด Phuket FantaSea — ราคาหลัก ฿1,800 / ท่าน แต่ออปชัน “Suriyamas Gold … ฿1,550 / ท่าน”</dd>
-        <dt>ผลกระทบ</dt><dd>ออปชันอัปเกรดที่ราคาถูกกว่าตัวหลักอ่านแล้วสับสน · ออปชันอื่นในการ์ดเดียวกันใช้รูปแบบชัด (“อัปเกรดที่นั่ง ฿350 / ที่นั่ง”) ทำให้ยิ่งเห็นความไม่สม่ำเสมอ</dd>
-        <dt>วิธีแก้</dt><dd>เขียนเป็น “+฿1,550 / ท่าน” ให้เหมือนออปชันอื่น หรือระบุราคารวมสุทธิเลย</dd>
+        <dt>ตำแหน่ง</dt><dd>probe ที่ 375px รายงาน <code>horizontalScroll = true</code> · ล้นขอบ 3 จุด — ตารางเปรียบเทียบ, แถบแท็บกรอง, และรูปใน section สุดท้าย</dd>
+        <dt>ผลกระทบ</dt><dd>หน้าขยับซ้ายขวาได้ตอนเลื่อนขึ้นลง ทำให้อ่านลำบากและดูเหมือนเว็บพัง · ที่ 768px และกว้างกว่าไม่พบปัญหา แปลว่าเป็นเรื่อง breakpoint เล็กอย่างเดียว</dd>
+        <dt>วิธีแก้</dt><dd>ตารางให้ครอบด้วย <code>overflow-x:auto</code> ในกล่องของตัวเอง · แถบแท็บใช้ scroll แนวนอนเฉพาะแถบ · รูปใส่ <code>max-width:100%</code></dd>
       </dl></div></details>
 
     <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">ทัวร์เกาะหลักยังไม่ระบุราคาเด็ก (โชว์และเรือเพิ่มให้แล้วรอบนี้)</span>
-      <span class="cr">แก้บางส่วน</span><span class="im i2">+2</span><span class="tm">40 น.</span><span class="ar">▸</span></summary>
+      <span class="t">ยังไม่มีสถานะ “ไม่พบผลลัพธ์” ของตัวกรอง (สถานะกำลังโหลดเพิ่มให้แล้วรอบนี้)</span>
+      <span class="cr">แก้บางส่วน</span><span class="im i2">+2</span><span class="tm">1 ชม.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ความคืบหน้ารอบนี้</dt><dd><b>ดีขึ้น</b> — Dolphin Show เพิ่มเงื่อนไข “เด็กต่ำกว่า 90 ซม. เข้าฟรี · 90–130 ซม. คิดราคาเด็ก” · Siam Niramit เพิ่มราคาเด็ก 100–140 ซม. ทั้ง 3 ระดับบัตร และ “ต่ำกว่า 100 ซม. เข้าฟรี” · เฟอร์รี่เพิ่ม “เด็กเล็กคิดค่าธรรมเนียม +฿300/เที่ยว”</dd>
-        <dt>ที่ยังขาด</dt><dd>เกาะพีพี, 4 เกาะเจมส์บอนด์, ราชา-เฮ, 7 เกาะ, สิมิลัน — ทัวร์เกาะซึ่งเป็นสินค้าหลักและเป็นกลุ่มที่ครอบครัวซื้อมากที่สุด ยังไม่มีราคาเด็ก</dd>
-        <dt>วิธีแก้</dt><dd>ใช้รูปแบบเดียวกับที่ทำในการ์ดโชว์และเฟอร์รี่แล้ว มาใส่ในการ์ดทัวร์เกาะให้ครบ</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">แสดงเลขบัญชีธนาคารบนหน้า public โดยไม่มีวิธีให้ลูกค้ายืนยันความถูกต้อง</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+2</span><span class="tm">20 น.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>section “ชำระเงินอย่างปลอดภัย” — แสดงชื่อบัญชี ธนาคาร และเลขบัญชี 332-2-83353-8</dd>
-        <dt>ผลกระทบ</dt><dd>คำเตือน “ชำระผ่านบัญชีที่มีชื่อบัญชีตรงกับชื่อบริษัทเท่านั้น” คิดมาดีแล้ว แต่การวางเลขบัญชีบนหน้า public ทำให้มิจฉาชีพคัดลอกหน้าเว็บทั้งหน้าแล้วเปลี่ยนเฉพาะเลขบัญชีได้ง่าย ซึ่งเป็นรูปแบบการโกงที่พบบ่อยในธุรกิจทัวร์ภูเก็ต</dd>
-        <dt>วิธีแก้</dt><dd>เพิ่ม “กรุณายืนยันเลขบัญชีกับทีมงานผ่าน LINE OA ก่อนโอนทุกครั้ง” · พิจารณาแสดงเฉพาะชื่อบัญชีกับธนาคารบนเว็บ แล้วแจ้งเลขในแชท</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">หมวดทัวร์ที่โชว์เด่นมี 3 หมวด แต่ filter มี 6 หมวด</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+1</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>section “ค้นหาภูเก็ตในแบบของคุณ” แสดง 3 หมวด (เกาะ &amp; ทะเล, ดำน้ำ, Local Phuket) · filter และเมนู footer มี 6 หมวด</dd>
-        <dt>ผลกระทบ</dt><dd>ผู้ใช้ที่สนใจ ATV ซิปไลน์ หรือโชว์ ไม่เห็นทางเข้าในส่วนที่ออกแบบมาให้เป็นจุดเริ่มค้นหา · กลุ่มโชว์มีสินค้าถึง 6 รายการซึ่งเยอะที่สุดรองจากทะเล</dd>
-        <dt>วิธีแก้</dt><dd>เพิ่มการ์ดให้ครบ 6 หมวด หรือปรับหัวข้อให้บอกว่าเป็นหมวดยอดนิยม 3 อันดับ พร้อมลิงก์ “ดูทุกหมวด”</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">ไม่มีคำอธิบายเรื่องสวัสดิภาพสัตว์ในรายการโลมา ขณะที่แคมป์ช้างมี</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">&lt;1</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>Dolphin Show และออปชัน “ว่ายน้ำกับโลมา ฿6,000” · เทียบกับแคมป์ช้างที่เขียน “เลือกแบบไม่ขี่ได้” และ “เราเลือกแคมป์ที่ดูแลช้างดีให้เท่านั้น”</dd>
-        <dt>ผลกระทบ</dt><dd>เว็บแสดงจุดยืนเรื่องช้างไว้ดีมาก แต่ไม่พูดถึงโลมาเลย ทำให้จุดยืนดูไม่สม่ำเสมอ · นักท่องเที่ยวยุโรปและออสเตรเลียซึ่งเป็นกลุ่มเป้าหมายของทัวร์ภูเก็ตจำนวนมากมองกิจกรรมโลมาในกรงเป็นประเด็น อาจกระทบภาพลักษณ์แบรนด์ที่วางตัวเป็น local ที่ใส่ใจชุมชน</dd>
-        <dt>วิธีแก้</dt><dd>คุยกับลูกค้าเรื่องจุดยืน แล้วเขียนให้สอดคล้องกับที่ทำไว้กับช้าง — ระบุมาตรฐานสถานที่ที่เลือก หรือถ้าจุดยืนคือไม่สนับสนุน ก็พิจารณาตัดออปชันว่ายน้ำกับโลมา</dd>
+        <dt>ความคืบหน้ารอบนี้</dt><dd><b>ดีขึ้น</b> — เพิ่มสถานะกำลังโหลดเป็น skeleton ให้แล้ว และปุ่มกรองมีสถานะ selected ชัดเจนขึ้น</dd>
+        <dt>ที่ยังขาด</dt><dd>เมื่อกรองแล้วไม่มีรายการตรงเงื่อนไข พื้นที่ผลลัพธ์ว่างเปล่าโดยไม่มีข้อความใดๆ ผู้ใช้แยกไม่ออกว่า “ไม่มีของ” หรือ “เว็บค้าง”</dd>
+        <dt>วิธีแก้</dt><dd>เพิ่มข้อความบอกสถานะพร้อมทางออก เช่น “ไม่พบรายการที่ตรงเงื่อนไข — ลองลดตัวกรอง หรือดูรายการทั้งหมด” พร้อมปุ่มล้างตัวกรอง</dd>
       </dl></div></details>
 
     <details><summary><span class="ic"><i class="sh sq"></i></span><span class="tg t-tc">Tech</span>
-      <span class="t">Social handle ไม่สอดคล้องกับแบรนด์ — TikTok เป็น @nessyeraaa</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">&lt;1</span><span class="tm">15 น.</span><span class="ar">▸</span></summary>
+      <span class="t">รูป 18 ใบไม่กำหนด width/height — เนื้อหาขยับตอนโหลด</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i2">+1</span><span class="tm">45 น.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>footer — IG <code>@nessyexplores</code> ✅ · YouTube <code>@nessyexplores</code> ✅ · TikTok <code>@nessyeraaa</code> ❌ · Facebook เป็นลิงก์ค้นหา ❌</dd>
-        <dt>ผลกระทบ</dt><dd>สองในห้าช่องทางไม่ตรงกับชื่อแบรนด์ ผู้ใช้ที่ตรวจสอบตัวตนธุรกิจก่อนโอนเงินอาจสะดุด</dd>
-        <dt>วิธีแก้</dt><dd>แจ้งลูกค้าเปลี่ยน handle TikTok ถ้าชื่อว่าง · ถ้าเปลี่ยนไม่ได้ ให้ระบุกำกับใน footer ว่าเป็นบัญชีของทีม Nessy</dd>
+        <dt>ตำแหน่ง</dt><dd>probe รายงาน <code>noDimensions = 18</code> จากรูปทั้งหมด 24 ใบ</dd>
+        <dt>ผลกระทบ</dt><dd>เบราว์เซอร์ไม่รู้ขนาดล่วงหน้าจึงจองพื้นที่ไม่ได้ เนื้อหากระโดดตอนรูปโหลดเสร็จ (CLS) · บนมือถือที่เน็ตช้า ผู้ใช้กดปุ่มผิดเพราะปุ่มเลื่อนหนีระหว่างโหลด</dd>
+        <dt>วิธีแก้</dt><dd>ใส่ <code>width</code> และ <code>height</code> จริงในแท็ก <code>&lt;img&gt;</code> ทุกใบ แล้วคุมขนาดจริงด้วย CSS · ใส่ <code>loading="lazy"</code> ให้รูปที่อยู่ใต้ first screen ไปพร้อมกัน</dd>
       </dl></div></details>
 
     <div class="gh">⚪ Low</div>
 
     <details><summary><span class="ic"><i class="sh da"></i></span><span class="tg t-ui">UI</span>
-      <span class="t">โลโก้และภาพ hero ไม่มี alt text (ภาพสินค้าเขียนไว้ดีเยี่ยม)</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i3">+7</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd><code>logo-mark.webp</code> ทั้งใน header และ footer · <code>hero-koh-hong.webp</code></dd>
-        <dt>ผลกระทบ</dt><dd>ภาพสินค้า 25 ใบเขียน alt ละเอียดมาก (เช่น “เรือหางยาวแล่นผ่านหน้าผาหินปูนและน้ำทะเลสีครามที่ไร่เลย์ กระบี่”) ดีกว่ามาตรฐานทั่วไป แต่ 3 จุดนี้ยังว่าง screen reader จึงไม่รู้ว่าโลโก้คือแบรนด์อะไร</dd>
-        <dt>วิธีแก้</dt><dd><code>alt="Nessy Explores"</code> ที่โลโก้ · hero ใส่ alt บรรยายภาพ หรือ <code>alt=""</code> อย่างตั้งใจถ้าถือเป็นภาพตกแต่ง</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh da"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">Section “รีวิวจริงจากทริปจริง” แสดงแต่คะแนนรวม ไม่มีรีวิวให้อ่าน</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i3">&lt;1</span><span class="tm">40 น.</span><span class="ar">▸</span></summary>
-      <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>section <code>#reviews</code> — แสดง 4.1 จาก 339 รีวิว พร้อมลิงก์ Google Maps</dd>
-        <dt>ผลกระทบ</dt><dd>หัวข้อสัญญาว่าจะได้อ่านรีวิวจากทริปจริง แต่ให้แค่ตัวเลขรวม · การมีลิงก์ตรวจสอบได้เป็นข้อดีที่ควรรักษาไว้ · ปุ่มปัจจุบันคือ “เขียนรีวิว” ซึ่งชวนให้เขียน ไม่ใช่ให้อ่าน จึงยิ่งไม่ตรงกับหัวข้อ</dd>
-        <dt>วิธีแก้</dt><dd>ดึงรีวิว 3–4 อันมาแสดงพร้อมชื่อและวันที่ (Google Places API) แล้วคงลิงก์ “ดูทั้งหมดบน Google” · เพิ่มปุ่ม “อ่านรีวิวทั้งหมด” แยกจาก “เขียนรีวิว”</dd>
-      </dl></div></details>
-
-    <details><summary><span class="ic"><i class="sh da"></i></span><span class="tg t-tc">Tech</span>
-      <span class="t">ใส่ cache-busting <code>?v=20260901</code> เฉพาะบางภาพ ไม่สม่ำเสมอ</span>
+      <span class="t">โลโก้และภาพ hero ไม่มี alt text (ภาพเนื้อหาเขียนไว้ครบ)</span>
       <span class="cr">ค้างจากรอบ 1</span><span class="im i3">&lt;1</span><span class="tm">15 น.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>ประมาณ 10 ภาพมี query string <code>?v=20260901</code> ส่วนที่เหลือไม่มี</dd>
-        <dt>ผลกระทบ</dt><dd>บ่งชี้ว่ามีการเปลี่ยนภาพรอบหนึ่งแล้วใส่ version เฉพาะภาพที่แก้ ใช้งานได้ แต่ถ้าแก้ภาพเดิมซ้ำโดยไม่เปลี่ยนเลข ผู้ใช้เดิมจะเห็นภาพเก่า</dd>
-        <dt>วิธีแก้</dt><dd>ใช้วิธีเดียวกันทั้งเว็บ — ตั้งชื่อไฟล์ใหม่เมื่อเปลี่ยนภาพ หรือใส่ version ให้ทุกภาพและอัปเดตพร้อมกันตอน deploy</dd>
+        <dt>ตำแหน่ง</dt><dd>โลโก้ใน header และ footer · ภาพ hero — probe รายงาน <code>missingAlt = 3</code></dd>
+        <dt>ผลกระทบ</dt><dd>ภาพเนื้อหาที่เหลือเขียน alt ไว้ดีมาก แต่ 3 จุดนี้ยังว่าง screen reader จึงอ่านได้แค่ชื่อไฟล์ ผู้ใช้ไม่รู้ว่าเป็นเว็บของใคร</dd>
+        <dt>วิธีแก้</dt><dd>โลโก้ใส่ <code>alt</code> เป็นชื่อแบรนด์ · hero ใส่ alt บรรยายภาพ หรือ <code>alt=""</code> อย่างตั้งใจถ้าถือเป็นภาพตกแต่ง</dd>
       </dl></div></details>
 
     <details><summary><span class="ic"><i class="sh da"></i></span><span class="tg t-ux">UX</span>
-      <span class="t">ออปชัน “ว่ายน้ำกับโลมา ฿6,000” แพงกว่าบัตรหลัก 8 เท่าโดยไม่มีบริบท</span>
-      <span class="cr">ค้างจากรอบ 1</span><span class="im i3">&lt;1</span><span class="tm">10 น.</span><span class="ar">▸</span></summary>
+      <span class="t">ข้อความ error ของฟอร์มบอกแค่ว่าผิด ไม่บอกว่าต้องแก้อะไร</span>
+      <span class="cr">ค้างจากรอบ 1</span><span class="im i3">&lt;1</span><span class="tm">30 น.</span><span class="ar">▸</span></summary>
       <div class="bo"><dl>
-        <dt>ตำแหน่ง</dt><dd>การ์ด Dolphin Show — บัตร ฿700 / ท่าน · ออปชัน ฿6,000 / ท่าน</dd>
-        <dt>วิธีแก้</dt><dd>เพิ่มคำอธิบายว่าราคานี้ครอบคลุมอะไร (ระยะเวลา จำนวนคนต่อรอบ รูปถ่าย) และระบุว่าแทนบัตรหลักหรือบวกเพิ่ม</dd>
+        <dt>ตำแหน่ง</dt><dd>ฟอร์มติดต่อ — ทุกช่องขึ้นข้อความเดียวกันว่า “ข้อมูลไม่ถูกต้อง”</dd>
+        <dt>ผลกระทบ</dt><dd>ผู้ใช้ต้องเดาเองว่าเบอร์โทรผิดรูปแบบ หรืออีเมลผิด หรือข้อความสั้นเกินไป · ฟอร์มนี้เป็นช่องทางติดต่อเดียวในหน้า การเดาผิดซ้ำๆ ทำให้เลิกกรอกกลางคัน</dd>
+        <dt>วิธีแก้</dt><dd>เขียนข้อความเฉพาะช่องและบอกรูปแบบที่ต้องการ เช่น “เบอร์โทรต้องเป็นตัวเลข 9–10 หลัก” · แสดง error ใต้ช่องที่ผิดพร้อมเลื่อนไปที่ช่องแรกที่ผิด</dd>
       </dl></div></details>
 
     <div class="roll"><span>เส้นทางคะแนน — แก้ทุกข้อในลิสต์นี้</span>
-      <span><b>36</b> → <b>~78</b> (แก้บั๊ก) → <b>100</b> (เก็บครบ) คะแนน</span></div>
+      <span><b>67</b> → <b>~85</b> (แก้ High + Medium) → <b>100</b> (เก็บครบ) คะแนน</span></div>
   </div>
 
+  <!-- ==== แท็บ 2 · ผ่านแล้ว — เขียนให้เจาะจงว่า "ผ่านเพราะอะไร" ไม่ใช่แค่ชื่อข้อ
+       จำนวน <li> ต้องเท่ากับตัวเลขบนแท็บ ==== -->
   <div class="pane p2">
     <div class="pgrp">
       <h4 class="ux">🧠 UX — Requirement &amp; Content</h4>
-      <li>CTA หลักชัดเจนและเจาะจงทุกจุด — “จองทริป”, “ดูทัวร์ทั้งหมด”, “สอบถาม” ไม่มี “Learn More” ลอยๆ</li>
-      <li>รีวิวรวมมีลิงก์ Google Maps ที่กดตรวจสอบได้จริง และแสดงคะแนน 4.1 ตามความจริง</li>
-      <li>ระบุหน่วยราคาชัดเจนทุกจุด — “/ ท่าน”, “/ คัน”, “/ 30 นาที”, “/ ที่นั่ง”</li>
-      <li>รถรับส่งสนามบินอธิบายชัดว่าเหมาต่อคันไม่คิดต่อหัว ซึ่งเป็นจุดที่ลูกค้าเข้าใจผิดบ่อย</li>
-      <li>ระบุข้อจำกัดตามฤดูกาลตรงไปตรงมา — สิมิลันเปิดเฉพาะ ต.ค.–พ.ค. และแนะนำให้จองล่วงหน้า</li>
-      <li><b>รอบนี้เพิ่ม</b> กิจกรรมเสริมเกาะราชา 6 รายการพร้อมราคาและระบุว่า “จ่ายเพิ่มหน้างาน”</li>
-      <li><b>รอบนี้เพิ่ม</b> เงื่อนไขเด็กของ Dolphin Show, Siam Niramit และเฟอร์รี่</li>
-      <li><b>รอบนี้เพิ่ม</b> “สิ่งที่ควรเตรียม” ของเจ็ตสกีและแคมป์ช้าง ช่วยลดคำถามซ้ำทาง LINE</li>
-      <li>ตารางเวลารับแคมป์ช้างละเอียดถึงระดับโซนพื้นที่ และแจกแจงพื้นที่บวกค่ารถ +฿1,500 อย่างโปร่งใส</li>
+      <li>CTA หลักเจาะจงทุกจุด บอกว่ากดแล้วจะได้อะไร ไม่มี “Learn More” ลอยๆ</li>
+      <li>ระบุหน่วยราคาชัดเจนทุกจุด — ต่อคน / ต่อชิ้น / ต่อรอบ ไม่ปล่อยให้ตีความเอง</li>
+      <li>เนื้อหาเป็นข้อมูลจริงทั้งหมด ไม่พบ lorem ipsum หรือ placeholder ค้าง</li>
+      <li>ระบุเงื่อนไขและข้อจำกัดตรงไปตรงมาในจุดที่ผู้ใช้ตัดสินใจ ไม่ซ่อนไว้ท้ายหน้า</li>
+      <li><b>รอบนี้เพิ่ม</b> ส่วน “คำถามที่พบบ่อย” 8 ข้อ ตรงกับคำถามที่เข้ามาทางแชทจริง</li>
 
-      <h4 class="ux">🧠 UX — IA &amp; Navigation (เต็ม 100)</h4>
-      <li>เมนู 8 รายการชี้ไป section ที่มีอยู่จริงและชื่อตรงกับเนื้อหาทุกรายการ</li>
-      <li>ลำดับหน้าเป็นเหตุเป็นผล — hero → หมวด → เกมจับคู่ → แพ็กเกจ → เรื่องราว → ทำไมเรา → แกลเลอรี → รีวิว → ติดต่อ</li>
-      <li>Footer ครบถ้วนผิดปกติในทางที่ดี — ที่อยู่พร้อมแผนที่, LINE, WhatsApp, โทร, อีเมล, เวลาทำการ, ใบอนุญาต, เมนูหมวดสินค้า, นโยบาย</li>
-      <li>มีหน้านโยบายความเป็นส่วนตัวและข้อกำหนดและเงื่อนไขแยกหน้า พร้อมลิงก์จาก footer</li>
+      <h4 class="ux">🧠 UX — IA &amp; Navigation</h4>
+      <li>เมนูทุกรายการชี้ไปยัง section ที่มีอยู่จริง และชื่อเมนูตรงกับหัวข้อปลายทาง</li>
+      <li>ลำดับหน้าเป็นเหตุเป็นผล — แนะนำ → รายละเอียด → หลักฐานความน่าเชื่อถือ → ติดต่อ</li>
+      <li>Footer ครบ — ที่อยู่ ช่องทางติดต่อ เวลาทำการ และลิงก์นโยบาย</li>
+      <li>มีหน้านโยบายความเป็นส่วนตัวและข้อกำหนดแยกหน้า พร้อมลิงก์จากทุกหน้า</li>
+
+      <h4 class="ui">🎨 UI</h4>
+      <li>ฟอนต์ที่ใช้จริงมี 2 ตระกูล และ border-radius มี 3 ค่า — อยู่ในเกณฑ์ที่ถือว่ามาจาก token</li>
+      <li>มี H1 เพียงหัวข้อเดียวและลำดับ heading ไม่กระโดดข้ามระดับ</li>
+      <li>ที่ 768px ขึ้นไปไม่พบ element ล้นขอบและไม่มี horizontal scroll</li>
+      <li>ภาพทุกใบตรงกับเนื้อหาของ section ที่อยู่ ไม่มีการวนใช้ภาพเดิมข้ามหัวข้อ</li>
 
       <h4 class="tc">⚙️ Technical</h4>
-      <li>ภาพเกือบทั้งหมดเป็น <code>.webp</code> แสดงว่ามีการ optimize มาแล้ว</li>
-      <li>มี Page Title และ Meta Description ที่เขียนมาอย่างตั้งใจ มีคีย์เวิร์ดครบ</li>
+      <li>ภาพเกือบทั้งหมดเป็น <code>.webp</code> แสดงว่าผ่านการ optimize มาแล้ว</li>
+      <li>มี Page Title, Meta Description, canonical และ <code>html lang</code> ครบ</li>
       <li>เนื้อหาสำคัญเป็นข้อความจริง ไม่ถูกฝังอยู่ในรูปภาพ</li>
-
-      <h4 class="ui">🎨 UI (ที่ตรวจได้จาก URL)</h4>
-      <li>มี skip link “ข้ามไปเนื้อหาหลัก” ซึ่งเว็บส่วนใหญ่ไม่ทำ</li>
-      <li>มี H1 เพียงหัวข้อเดียวและลำดับ heading ถูกต้อง</li>
-      <li>ภาพแต่ละการ์ดตรงกับเนื้อหาสินค้าจริง ไม่มีการวนใช้ภาพเดิมข้ามสินค้า</li>
     </div>
   </div>
 
+  <!-- ==== แท็บ 3 · ตรวจไม่ได้ — ทุกแถวต้องบอก "เหตุผล" และ "วิธีตรวจ" ที่ทำได้จริง
+       ข้อในแท็บนี้ถือเป็น ⏭️ ไม่นับทั้งตัวตั้งและตัวหารของสูตรคะแนน ==== -->
   <div class="pane p3">
     <table>
       <thead><tr><th style="width:15%">กลุ่ม</th><th style="width:26%">รายการ</th><th style="width:25%">เหตุผล</th><th>วิธีตรวจ</th></tr></thead>
       <tbody>
-        <tr><td><span class="tg t-ux">UX</span></td><td>UX3 Flow, States &amp; Interaction <span class="sd">(6 คะแนน)</span></td><td>ต้องกดจริง — ไม่มีข้อใดตรวจได้จาก URL</td><td>เดิน flow จนจบ · ตรวจ 6 states ของเกมและ filter · edge case ข้อความยาว/ไม่มีผลลัพธ์</td></tr>
-        <tr><td><span class="tg t-ui">UI</span></td><td>UI1 Design System &amp; Visual <span class="sd">(10 คะแนน)</span></td><td>ไม่มี CSS/source และไม่มี CI guideline ของลูกค้า</td><td>ดึงค่า hex / font-family ทั้งหมดมาเทียบ CI · ตรวจ component ซ้ำและ spacing scale</td></tr>
-        <tr><td><span class="tg t-ui">UI</span></td><td>UI2 Responsive Layout <span class="sd">(8 คะแนน)</span></td><td>เห็นแค่ viewport meta</td><td>เปิด 375/768/1440/1920 px — เน้นกริดการ์ด 25 ใบ, filter tabs, ตารางเวลารับ, ปุ่มลอย</td></tr>
-        <tr><td><span class="tg t-ux">UX</span></td><td><b>เกมจับคู่ทริป 3 คำถาม</b></td><td>เห็นแต่โครงใน DOM (01/03, เริ่มใหม่)</td><td>เล่นทุกเส้นทางคำตอบ ตรวจว่า “เริ่มใหม่” รีเซ็ตจริง และผลลัพธ์พาไปการ์ดที่มีอยู่จริง</td></tr>
-        <tr><td><span class="tg t-ux">UX</span></td><td><b>ปุ่มสลับภาษา TH / EN</b></td><td>เห็นแต่ปุ่มใน DOM</td><td>สลับเป็น EN ตรวจว่าแปลครบทุก section หรือแค่บางส่วน · ปี © 2569 ต้องเปลี่ยนเป็น 2026 ในภาษาอังกฤษ — สำคัญเพราะกลุ่มเป้าหมายเป็นต่างชาติ</td></tr>
-        <tr><td><span class="tg t-ux">UX</span></td><td>Filter หมวดทัวร์ 8 ปุ่ม</td><td>ต้องกดจริง</td><td>กดทุกหมวด ตรวจว่ากรองถูกและมีสถานะ “ไม่พบรายการ” ถ้าหมวดว่าง</td></tr>
-        <tr><td><span class="tg t-ui">UI</span></td><td>Timeline “หนึ่งวันสไตล์คนภูเก็ต”</td><td>render เป็นตัวเลขลอย 07:00 08:30 …</td><td>ตรวจว่าเป็นแผนที่/timeline แบบสมบูรณ์ ไม่ใช่ element ที่ยังไม่เสร็จ</td></tr>
-        <tr><td><span class="tg t-ux">UX</span></td><td><b>นโยบายยกเลิกและเลื่อนทริป</b></td><td>อยู่ใน <code>terms.html</code> ซึ่งยังไม่ได้ตรวจทั้งสองรอบ</td><td>เปิด terms.html ตรวจว่ามีเงื่อนไขยกเลิก คืนเงิน และกรณีทะเลปิด/มรสุมครบไหม — ธุรกิจทัวร์ทางทะเลจำเป็นมาก</td></tr>
-        <tr><td><span class="tg t-tc">Tech</span></td><td>สิทธิ์การใช้ภาพและโลโก้</td><td>ตรวจจากภาพไม่ได้</td><td>ยืนยันกับลูกค้าว่าภาพ 25+ ใบถ่ายเองหรือซื้อสิทธิ์แล้ว · โลโก้ KBank ใช้ตามแนวทางของธนาคาร</td></tr>
+        <tr><td><span class="tg t-ux">UX</span></td><td>UX3 Flow, States &amp; Interaction <span class="sd">(7 คะแนน)</span></td><td>ต้องกดจริง — ไม่มีข้อใดตรวจได้จากลิงก์อย่างเดียว</td><td>เดิน flow หลักจนจบ · ตรวจให้ครบทั้ง 6 สถานะ (ว่าง / กำลังโหลด / ผิดพลาด / สำเร็จ / ปิดใช้งาน / ข้อความยาวเกิน)</td></tr>
+        <tr><td><span class="tg t-ux">UX</span></td><td><b>ฟอร์มติดต่อ</b></td><td>เห็นแต่โครงใน DOM ยังไม่ได้ส่งจริง</td><td>ส่งทั้งกรณีกรอกถูกและกรอกผิด ตรวจว่าข้อมูลถึงปลายทางจริง และมีหน้ายืนยันหลังส่ง</td></tr>
+        <tr><td><span class="tg t-ux">UX</span></td><td>ตัวกรองและการค้นหา</td><td>ต้องกดจริง</td><td>กดทุกตัวเลือก ตรวจว่ากรองถูกต้อง มีสถานะ “ไม่พบผลลัพธ์” และล้างตัวกรองได้</td></tr>
+        <tr><td><span class="tg t-ui">UI</span></td><td>โหมดมืด</td><td>ไม่พบ <code>prefers-color-scheme</code> ใน CSS ที่โหลดมา</td><td>สลับ OS เป็นโหมดมืดแล้วดูว่าตั้งใจไม่รองรับ หรือรองรับแต่ยังไม่เสร็จ</td></tr>
+        <tr><td><span class="tg t-ui">UI</span></td><td>ความสอดคล้องกับ CI ของลูกค้า</td><td>ไม่ได้รับ Brand / CI Guideline</td><td>ขอไฟล์ CI แล้วเทียบค่าสีและฟอนต์ที่ probe ดึงมาได้ทีละค่า</td></tr>
+        <tr><td><span class="tg t-tc">Tech</span></td><td>สิทธิ์การใช้ภาพและฟอนต์</td><td>ตรวจจากหน้าเว็บไม่ได้</td><td>ยืนยันกับลูกค้าว่าภาพถ่ายเองหรือซื้อสิทธิ์แล้ว และฟอนต์มีสิทธิ์ใช้เชิงพาณิชย์</td></tr>
       </tbody>
     </table>
-    <div class="warn">⚠️ กลุ่ม UI ตรวจได้แค่ 14 จาก 32 คะแนน — <b>คะแนน UI 0 ในรอบนี้ไม่ได้แปลว่างานดีไซน์แย่</b> แต่แปลว่ายังพิสูจน์ไม่ได้ ต้องเปิด browser หรือรันใน Claude Code จึงจะได้คะแนนที่มีความหมาย</div>
+    <div class="warn">⚠️ ถ้ารัน probe ไม่ได้ (เปิดเว็บไม่ออก / ไม่มี browser) ต้องรายงานกลุ่ม UI ทั้งกลุ่มเป็น <b>⚪ Not Tested</b> และแสดง coverage — <b>ห้ามให้คะแนน 0</b> เพราะ 0 แปลว่า “ตรวจแล้วไม่ผ่าน” ไม่ใช่ “ยังไม่ได้ตรวจ”</div>
   </div>
 
+  <!-- ==== แท็บ 4 · ความพร้อม & รอบถัดไป ====
+       ใช้บล็อกของ Track เดียวเท่านั้น — ตัวอย่างนี้แสดงทั้งสองแบบเพื่อให้เห็นโครงที่ต้องใช้
+       ทำรายงานจริงให้ลบบล็อกของ Track ที่ไม่ได้ตรวจทิ้ง -->
   <div class="pane p4">
+
+    <div class="gh">🟦 Product เท่านั้น — Product Gate (ขั้น 5B)</div>
     <table>
-      <thead><tr><th style="width:36%">Artifact ต้นน้ำ (🟨 Project)</th><th style="width:14%">สถานะ</th><th>ผลต่อการตรวจ</th></tr></thead>
+      <thead><tr><th style="width:36%">เช็ก</th><th style="width:14%">ผล</th><th>เหตุผล</th></tr></thead>
+      <tbody>
+        <tr><td><b>P1</b> สรุปโจทย์ถูกไหม</td><td class="st sd">➖ ไม่มีข้อมูล</td><td>ไม่ได้รับ Brief / AC และ Persona จึงเทียบกับสิ่งที่หน้าเว็บทำจริงไม่ได้ — <b>ห้ามเดาว่าผ่าน</b></td></tr>
+        <tr><td><b>P2</b> ครบจริงไหม</td><td class="st sn">❌ ไม่ผ่าน</td><td>ไม่มีเอกสาร state / edge case ให้เทียบ · การที่หน้าเว็บบังเอิญมีครบไม่นับว่าผ่าน เพราะไม่มีเกณฑ์ว่าต้องมีอะไรบ้าง</td></tr>
+        <tr><td><b>P3</b> ใช้มาตรฐานไหม</td><td class="st sd">➖ ไม่มีข้อมูล</td><td>ยังไม่ระบุชื่อ Design System + version และ pattern ที่หยิบมาใช้</td></tr>
+        <tr><td><b>P4</b> เนื้อหาเป็นของจริง</td><td class="st sy">✅ ผ่าน</td><td>ไม่พบ lorem / placeholder · ตัวเลขในหน้าตรงกับแหล่งข้อมูลที่ทีมส่งมา ยกเว้นข้อ “40+ รายการ” ที่รายงานเป็นปัญหา High แล้ว</td></tr>
+        <tr><td><b>P5</b> ทำได้จริงไหม</td><td class="st sd">➖ ไม่มีข้อมูล</td><td>ไม่มีหลักฐานว่าผ่าน dev BR / feasibility review</td></tr>
+      </tbody>
+    </table>
+    <div class="warn">Product Gate <b>ไม่คิดคะแนน</b> — ไม่เข้าสูตร /100 มีผลเฉพาะกับคำตัดสิน · <b>P1 ❌ = ตีกลับ</b> (โจทย์ผิดตั้งแต่ต้นน้ำ คะแนนหน้าเว็บไม่มีความหมาย) · <b>P5 ❌ = ห้ามสรุปว่า “พร้อม merge / ship”</b> แม้คะแนนจะ ≥ 90 · P2 / P3 / P4 ❌ ไม่ลดคำตัดสิน แต่ต้องขึ้นเป็นข้อแรกของรอบถัดไป</div>
+
+    <div class="gh">🟨 Project เท่านั้น — Artifact ต้นน้ำ</div>
+    <table>
+      <thead><tr><th style="width:36%">Artifact ต้นน้ำ</th><th style="width:14%">สถานะ</th><th>ผลต่อการตรวจ</th></tr></thead>
       <tbody>
         <tr><td>Project Card / Brief + AC</td><td class="st sn">ไม่มี</td><td>ตรวจไม่ได้ว่า deliverable ครบตาม scope และไม่เกิน scope</td></tr>
         <tr><td>IA / Sitemap</td><td class="st sn">ไม่มี</td><td>ตรวจได้แค่ “nav ใช้ง่ายไหม” ไม่ใช่ “ตรง IA ที่วางไว้ไหม”</td></tr>
-        <tr><td>User Flow</td><td class="st sn">ไม่มี</td><td>ตรวจไม่ได้ว่า flow จับคู่ทริป → แพ็กเกจ → LINE ครบตามที่ออกแบบ</td></tr>
-        <tr><td>Brand / CI Guideline ของลูกค้า</td><td class="st sn">ไม่มี</td><td>ตรวจ deviation ของสี ฟอนต์ โลโก้ ไม่ได้ — ทั้งที่พบสัญญาณแบรนด์ไม่สอดคล้องในโซเชียลแล้ว</td></tr>
-        <tr><td>Design Spec + variant ที่ลูกค้าเลือก</td><td class="st sn">ไม่มี</td><td>ตรวจไม่ได้ว่าทำตาม variant ที่ตกลงใน Stage 2</td></tr>
-        <tr><td>State / Edge case list</td><td class="st sn">ไม่มี</td><td>ไม่มีเกณฑ์ว่าเกมและ filter ต้องมี state อะไรบ้าง</td></tr>
-        <tr><td>Staging URL</td><td class="st sy">มี</td><td>เข้าได้จากภายนอก ตรวจเนื้อหาได้</td></tr>
-        <tr><td>Deploy checklist + Test Scenario</td><td class="st sn">ไม่มี</td><td>ไม่มีสคริปต์ให้ลูกค้าเดินทดสอบตอน UAT</td></tr>
-        <tr><td><b>Improvement Log รอบที่ 1</b></td><td class="st sn">ไม่มี</td><td><b>สำคัญรอบนี้</b> — ไม่มีบันทึกว่าข้อ High 5 ข้อจากรอบก่อนตัดสินใจไม่แก้ หรือยังไม่ได้แก้ ทำให้ตามงานไม่ได้</td></tr>
+        <tr><td>User Flow</td><td class="st sn">ไม่มี</td><td>ตรวจไม่ได้ว่า flow หลักครบตามที่ออกแบบไว้</td></tr>
+        <tr><td>Brand / CI Guideline ของลูกค้า</td><td class="st sn">ไม่มี</td><td>เทียบค่าสีและฟอนต์ที่ probe วัดได้กับ CI ไม่ได้ — ได้แค่ดูว่าค่าที่ใช้เป็นระบบหรือไม่</td></tr>
+        <tr><td>Design Spec + variant ที่ลูกค้าเลือก</td><td class="st sn">ไม่มี</td><td>ตรวจไม่ได้ว่าทำตาม variant ที่ตกลงกันไว้</td></tr>
+        <tr><td>State / Edge case list</td><td class="st sn">ไม่มี</td><td>ไม่มีเกณฑ์ว่าตัวกรองและฟอร์มต้องมี state อะไรบ้าง (เป็นเหตุให้ UX3 ตรวจไม่ได้)</td></tr>
+        <tr><td>Staging URL</td><td class="st sy">มี</td><td>เข้าได้จากภายนอก รัน probe ได้ครบ 4 breakpoint</td></tr>
+        <tr><td>Deploy checklist + Test Scenario</td><td class="st sn">ไม่มี</td><td>ไม่มีสคริปต์ให้ลูกค้าเดินทดสอบตอน UAT · เป็นสาเหตุที่ <code>og:image</code> หายไปโดยไม่มีใครเห็น</td></tr>
+        <tr><td><b>Improvement Log รอบที่ 1</b></td><td class="st sn">ไม่มี</td><td><b>สำคัญรอบนี้</b> — ไม่มีบันทึกว่าข้อที่ค้างอยู่เป็นเพราะยังไม่ได้แก้ หรือตัดสินใจไม่แก้ ทำให้ตามงานไม่ได้</td></tr>
         <tr><td>Handoff Section F (F1 / F2)</td><td class="st sn">ไม่มี</td><td>ยังไม่มีเอกสารส่งต่อ</td></tr>
       </tbody>
     </table>
+
     <div class="note">
-      <b>สรุป:</b> มีแค่ staging URL — ขาด artifact ต้นน้ำทั้งหมด ตรวจได้เฉพาะคุณภาพที่มองเห็นจากหน้าเว็บ
-      ยืนยันไม่ได้ว่าตรงกับที่ตกลงกับลูกค้า ซึ่งเป็นหัวใจของ Project track<br>
-      <b style="color:#D93025">ข้อสังเกตสำคัญของรอบที่ 2:</b> การไม่มี improvement log ทำให้ไม่รู้ว่าข้อ High ที่ค้างอยู่ 5 ข้อเป็นเพราะยังไม่ได้ทำ หรือลูกค้าตัดสินใจไม่แก้ — <b>ควรเริ่มทำ log ก่อนเข้ารอบที่ 3</b> เพราะ Project track มี UAT budget จำกัด (M = 2 รอบ) และรอบนี้ใช้ไปแล้ว 2 รอบ<br><br>
-      <b class="lb">ข้อมูลที่ได้รับ</b> · URL, track (Project), ประเภท (landing page)<br>
-      <b class="lb">สมมติฐานที่ใช้ตรวจ</b> · Type = 🅐 Information เพราะไม่มีตะกร้าหรือ checkout บนเว็บ ทุก CTA ไปที่ LINE (ประเด็นราคาและนโยบายยังรายงานให้ แต่ไม่คิดคะแนนในชุด E-Commerce) · Size = M · Stage = ก่อนส่งลูกค้า UAT · เป้าหมาย = ให้ข้อมูลทัวร์และส่งคนเข้า LINE
+      <b>สรุป:</b> มีแค่ staging URL — ขาด artifact ต้นน้ำเกือบทั้งหมด ตรวจได้เฉพาะคุณภาพที่วัดได้จากหน้าเว็บ
+      ยืนยันไม่ได้ว่าตรงกับที่ตกลงกันไว้<br>
+      <b style="color:#D93025">ข้อสังเกตของรอบนี้:</b> การไม่มี improvement log และ deploy checklist ทำให้เกิดการถอยหลัง (<code>og:image</code> หาย) โดยไม่มีใครจับได้ — <b>ควรเริ่มทำทั้งสองอย่างก่อนเข้ารอบถัดไป</b><br><br>
+      <b class="lb">ข้อมูลที่ได้รับ</b> · URL, Track, ประเภทงาน<br>
+      <b class="lb">สมมติฐานที่ใช้ตรวจ</b> · Type = 🅐 Information เพราะไม่มีตะกร้าหรือ checkout บนเว็บ (ประเด็นราคายังรายงานให้ แต่ไม่คิดคะแนนในชุด E-Commerce) · Size = M · Stage = ก่อนส่งลูกค้า UAT · เป้าหมาย = ให้ข้อมูลและส่งคนเข้าช่องทางติดต่อ
     </div>
+
     <table style="margin-top:2px">
-      <thead><tr><th colspan="2">📦 ความพร้อมส่งมอบ — สิ่งที่ต้องเคลียร์ก่อนรอบที่ 3</th></tr></thead>
+      <thead><tr><th colspan="2">📦 รอบถัดไป — สิ่งที่ต้องเคลียร์ก่อนตรวจรอบหน้า</th></tr></thead>
       <tbody>
-        <tr><td style="width:28%">ต้องขอจากลูกค้า</td><td>URL เพจ Facebook ที่ถูกต้อง · ชุดเวลาทำการที่เป็นความจริง · จำนวนทริปจริงเพื่อแก้ตัวเลข 40+ · <b>ที่มาของคะแนนรายทริป 4.6–4.9</b> · ยืนยันว่าราคารวม VAT หรือไม่ · ราคาเด็กของทัวร์เกาะ · ราคาของ 7 รายการที่ยังเป็น “สอบถามราคา” · ยืนยันสิทธิ์การใช้ภาพ</td></tr>
-        <tr><td>ต้องตัดสินใจร่วมกัน</td><td>จะแสดงเลขบัญชีบนหน้า public ต่อหรือย้ายไปแจ้งในแชท · จุดยืนเรื่องกิจกรรมโลมาให้สอดคล้องกับที่ประกาศไว้เรื่องช้าง · จะเติมราคาให้ 7 รายการที่เหลือหรือคงไว้เพื่อเก็บ lead</td></tr>
-        <tr><td>ต้องทำฝั่งทีม</td><td><b>เริ่มทำ improvement log</b> บันทึกทุกข้อจากรอบ 1–2 พร้อมสถานะ · เขียน test scenario เน้นเกมจับคู่ทริปและปุ่มสลับภาษา · แนบ deploy checklist · <b>ตรวจ UI บน browser จริงก่อนรอบหน้า</b> เพราะรอบนี้กลุ่ม UI ยังพิสูจน์ไม่ได้เลย</td></tr>
+        <tr><td style="width:28%">ต้องขอจากลูกค้า</td><td>จำนวนรายการจริงเพื่อแก้ตัวเลขที่โฆษณา · Brand / CI Guideline เพื่อให้ตรวจ UI1 ได้เต็ม · ยืนยันสิทธิ์การใช้ภาพและฟอนต์</td></tr>
+        <tr><td>ต้องตัดสินใจร่วมกัน</td><td>จะรองรับโหมดมืดหรือประกาศว่าไม่รองรับ · จะเก็บตารางเปรียบเทียบไว้บนมือถือหรือเปลี่ยนเป็นการ์ด</td></tr>
+        <tr><td>ต้องทำฝั่งทีม</td><td><b>เริ่มทำ improvement log</b> บันทึกทุกข้อพร้อมสถานะ · <b>เพิ่มการตรวจ meta ลงใน deploy checklist</b> เพื่อกันการถอยหลังซ้ำ · เขียน test scenario ของฟอร์มและตัวกรอง · รัน <code>run-ui-probe.py</code> ซ้ำหลังแก้ contrast เพื่อยืนยัน</td></tr>
       </tbody>
     </table>
   </div>
 
-  <!-- ==== แท็บ 🕐 ประวัติ — ไทม์ไลน์ตรวจซ้ำ (มีเฉพาะรายงาน "ตรวจซ้ำ" · รอบแรกไม่ต้องมีแท็บนี้) ==== -->
+  <!-- ==== แท็บ 5 · 🕐 ประวัติ — ไทม์ไลน์ตรวจซ้ำ (มีเฉพาะรายงาน "ตรวจซ้ำ" · รอบแรกไม่ต้องมีแท็บนี้) ====
+       สีตัวเลข Δ: ขึ้น = .up (เขียว) · ลง = .dn (แดง) · เท่าเดิม = .fl (เทา — เขียนเป็นคำสั้นๆ เช่น "คงเดิม" / "คงเต็ม")
+       .rtag ใส่เฉพาะรอบล่าสุด (.cur "รอบนี้") กับรอบแรกสุด (.base "baseline") — รอบที่อยู่ตรงกลางไม่ต้องใส่
+       ⚠️ ถ้าเปลี่ยนโมเดลคะแนนระหว่างรอบ ห้ามแสดง Δ เป็นตัวเลข ให้เขียนว่าเทียบตรงๆ ไม่ได้เพราะอะไร -->
   <div class="pane p5">
     <div class="hist">
-      <div class="hnote">บันทึกทุกรอบที่ตรวจ — คะแนนรวม/รายกลุ่ม + สิ่งที่เปลี่ยนแต่ละรอบ · รอบล่าสุดอยู่บนสุด · <b>ตรวจซ้ำต้องแสดง Δ ของทั้ง 3 กลุ่มและคะแนนรวม</b> (ย้ายมาจากการ์ดสรุปด้านบน)</div>
+      <div class="hnote">บันทึกทุกรอบที่ตรวจ — คะแนนรวม/รายกลุ่ม + สิ่งที่เปลี่ยนแต่ละรอบ · รอบล่าสุดอยู่บนสุด · <b>ตรวจซ้ำต้องแสดง Δ ของทั้ง 3 กลุ่มและคะแนนรวม</b> · ถ้ามีกลุ่มไหนถอยหลังต้องระบุสาเหตุให้ชัดว่าเป็นเพราะอะไร</div>
 
       <div class="hitem now">
         <span class="hdot"></span>
-        <div class="hrd"><span class="rn">รอบ 2</span><span class="rdate">2 ก.ย. 2026</span>
+        <div class="hrd"><span class="rn">รอบ 2</span><span class="rdate">21 ก.ย. 2026</span>
           <span class="rtag cur">รอบนี้</span></div>
         <div class="hsc">
-          <span class="hov">คะแนนรวม 28 → <b>36</b></span><span class="up">▲+8</span>
-          <span class="hg">🧠 UX 44 → 53 <span class="up">▲+9</span></span>
-          <span class="hg">🎨 UI 0 → 0 <span class="fl">—</span></span>
-          <span class="hg">⚙️ Tech 15 → 27 <span class="up">▲+12</span></span>
+          <span class="hov">คะแนนรวม 59 → <b>67</b></span><span class="up">▲+8</span>
+          <span class="hg">🧠 UX 70 → 78 <span class="up">▲+8</span></span>
+          <span class="hg">🎨 UI 32 → 45 <span class="up">▲+13</span></span>
+          <span class="hg">⚙️ Tech 95 → 93 <span class="dn">▼−2</span></span>
         </div>
         <ul class="hchg">
-          <li>✅ <b>แก้จากรอบก่อน (dev แก้จริง):</b> ระบุที่มาของคะแนนรีวิว · รวมชุดเวลาทำการให้ตรงกันทั้งหน้า · เพิ่ม alt ให้รูปหลัก</li>
-          <li>↩︎ <b>คืนคะแนนให้ผ่าน (ลูกค้า/ทีมยืนยัน):</b> canonical/og ชี้โดเมนจริง = งานตั้งค่าตอน deploy (ทีมยืนยัน → ผ่าน)</li>
-          <li>⏳ <b>ยังค้าง (ยังไม่แก้):</b> ยังไม่เปิด browser ตรวจ UI จริง (UI ยังได้ 0) · ตัวเลข “40+ ทริป” ยังตรวจสอบไม่ได้</li>
+          <li>✅ <b>แก้จากรอบก่อน (dev แก้จริง):</b> เพิ่ม alt ให้ภาพเนื้อหาครบทุกใบ · เพิ่มสถานะกำลังโหลดของตัวกรอง · แก้ element ล้นขอบที่ 768px</li>
+          <li>↩︎ <b>คืนคะแนนให้ผ่าน (ทีมยืนยันแล้ว):</b> canonical ชี้โดเมนจริง — เป็นงานตั้งค่าตอน deploy ไม่ใช่ข้อบกพร่องของงาน</li>
+          <li>⚠️ <b>ถอยหลัง:</b> <code>og:image</code> ที่รอบที่ 1 เคยมี หายไปหลัง deploy รอบนี้ — เป็นสาเหตุเดียวที่ทำให้ Tech ลดลง 2 คะแนน</li>
+          <li>⏳ <b>ยังค้าง (ยังไม่แก้):</b> contrast 23 จุด · touch target 6 จุดที่ 375px · element ล้นขอบที่ 375px · ตัวเลข “40+ รายการ” ยังไม่ตรงกับของจริง</li>
         </ul>
       </div>
 
       <div class="hitem">
         <span class="hdot"></span>
-        <div class="hrd"><span class="rn">รอบ 1</span><span class="rdate">26 ส.ค. 2026</span>
+        <div class="hrd"><span class="rn">รอบ 1</span><span class="rdate">7 ก.ย. 2026</span>
           <span class="rtag base">baseline</span></div>
         <div class="hsc">
-          <span class="hov">คะแนนรวม <b>28</b></span>
-          <span class="hg">🧠 UX 44</span><span class="hg">🎨 UI 0</span><span class="hg">⚙️ Tech 15</span>
+          <span class="hov">คะแนนรวม <b>59</b></span>
+          <span class="hg">🧠 UX 70</span><span class="hg">🎨 UI 32</span><span class="hg">⚙️ Tech 95</span>
         </div>
         <ul class="hchg">
-          <li>🔍 รีวิวแรก — พบ 6 High · 8 Medium · 4 Low · กลุ่ม UI ตรวจไม่ได้เพราะรีวิวผ่าน URL อย่างเดียว (ต้องเปิด browser/probe)</li>
+          <li>🔍 รีวิวแรก — พบ 5 High · 6 Medium · 3 Low · รัน probe ครบ 4 breakpoint ตั้งแต่รอบแรก จึงมีคะแนน UI ที่เทียบรอบต่อไปได้</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <!-- ==== แท็บ 📸 ภาพประกอบ (บังคับมีทุกรายงาน) — ฝัง base64 data-URI ให้เปิดไฟล์เดี่ยวได้ ==== -->
+  <!-- ==== แท็บ 6 · 📸 ภาพประกอบ (บังคับมีทุกรายงาน) — ฝัง base64 data-URI ให้เปิดไฟล์เดี่ยวได้ ====
+       แทน "…" ด้วยข้อมูล base64 จริงจาก shot-*.png ที่ run-ui-probe.py สร้างไว้
+       คำขึ้นต้นใน figcaption ของ .shotfig — ใช้สองแบบนี้เท่านั้น:
+         <b>✓ แก้แล้ว — …</b>           เขียว  สำหรับข้อที่รอบนี้แก้ผ่านแล้ว
+         <b class="bad">△ ยังเหลือ — …</b>  แดง   สำหรับข้อที่ยังไม่ผ่าน
+       รอบแรกที่ยังไม่มีอะไร "แก้แล้ว" ให้ใช้เฉพาะแบบ .bad -->
   <div class="pane p6">
     <div class="shots">
       <h4>ภาพรวมแต่ละ breakpoint — ส่วนบนของหน้า · 4 ขนาด</h4>
       <div class="bpr">
-        <figure><img src="data:image/jpeg;base64,…" alt="hero 375px"><figcaption><b>375px</b> · มือถือ</figcaption></figure>
-        <figure><img src="data:image/jpeg;base64,…" alt="hero 768px"><figcaption><b>768px</b> · แท็บเล็ต</figcaption></figure>
-        <figure><img src="data:image/jpeg;base64,…" alt="hero 1440px"><figcaption><b>1440px</b> · เดสก์ท็อป</figcaption></figure>
-        <figure><img src="data:image/jpeg;base64,…" alt="hero 1920px"><figcaption><b>1920px</b> · จอกว้าง</figcaption></figure>
+        <figure><img src="data:image/jpeg;base64,…" alt="ส่วนบนของหน้าที่ 375px"><figcaption><b>375px</b> · มือถือ</figcaption></figure>
+        <figure><img src="data:image/jpeg;base64,…" alt="ส่วนบนของหน้าที่ 768px"><figcaption><b>768px</b> · แท็บเล็ต</figcaption></figure>
+        <figure><img src="data:image/jpeg;base64,…" alt="ส่วนบนของหน้าที่ 1440px"><figcaption><b>1440px</b> · เดสก์ท็อป</figcaption></figure>
+        <figure><img src="data:image/jpeg;base64,…" alt="ส่วนบนของหน้าที่ 1920px"><figcaption><b>1920px</b> · จอกว้าง</figcaption></figure>
       </div>
-      <h4>จุดที่พบปัญหา — ครอปซูมจากการวัดจริง</h4>
-      <figure class="shotfig"><img src="data:image/jpeg;base64,…" alt="evidence"><figcaption>บรรยายจุดปัญหาที่เห็นในภาพ พร้อมตัวเลขที่วัดได้ เช่น contrast <b>2.1</b> หรือ touch target <b>28×28</b></figcaption></figure>
+      <h4>จุดที่ตรวจซ้ำ — ครอปซูมจากการวัดจริง · หนึ่งภาพต่อหนึ่งข้อ และต้องอ้างถึงข้อในแท็บ “ปัญหาที่ต้องแก้” ได้</h4>
+      <figure class="shotfig"><img src="data:image/jpeg;base64,…" alt="ภาพครอปแถบตัวกรองที่เพิ่มสถานะกำลังโหลดแล้ว"><figcaption><b>✓ แก้แล้ว — สถานะกำลังโหลดของตัวกรอง</b> รอบที่ 1 กดแล้วหน้าค้างเฉยๆ รอบนี้ขึ้น skeleton ระหว่างรอ และปุ่มที่เลือกอยู่มีสถานะ selected ชัดเจน · เขียนสิ่งที่เปลี่ยนให้เห็นในภาพ ไม่ใช่แค่บอกว่าแก้แล้ว</figcaption></figure>
+      <figure class="shotfig"><img src="data:image/jpeg;base64,…" alt="ภาพครอปจุดที่ contrast ไม่ผ่าน"><figcaption><b class="bad">△ ยังเหลือ — contrast ต่ำกว่าเกณฑ์ AA</b> caption ใต้รูปวัดได้ <b class="bad">2.1 : 1</b> ที่ต้องได้ 4.5 : 1 (<code>#9AA0A6</code> บน <code>#FFFFFF</code>) · ต้องมีตัวเลขที่วัดได้จริงคู่กับเกณฑ์เสมอ ไม่ใช่เขียนว่า “สีจาง”</figcaption></figure>
     </div>
-    <div class="shotnote">ภาพครอปจากการรัน probe จริง (playwright) · หมายเหตุ false positive (พื้นภาพ/section เข้ม) ไม่นับคะแนน</div>
+    <div class="shotnote">ภาพครอปจากการรัน probe จริง (playwright) · ถ้ามี false positive (พื้นภาพเข้ม / section ที่กลับสี) ให้ระบุไว้ตรงนี้ว่าไม่นับคะแนน</div>
   </div>
 </div>
 
 <div class="foot">
-  สร้างโดย skill <code>web-quality-review</code> v5.0 · Sellsuki UXUI Standard<br>
-  🟨 Project อ้างอิง <code>sellsuki-project-standard</code>
+  สร้างโดย skill <code>web-quality-review</code> v6.1 · Sellsuki UXUI Standard · <b>ตรวจซ้ำ รอบ 2</b><br>
+  🟦 Product · รีวิวผ่านลิงก์ /100 (น้ำหนักของ 🅐 Information — UX 47 · UI 38 · Tech 15) · วัด UI ด้วย playwright ที่ 375/768/1440/1920px<br>
+  🟦 Product อ้างอิง <code>sellsuki-product-standard</code> · 🟨 Project อ้างอิง <code>sellsuki-project-standard</code>
 </div>
 
 </div>
